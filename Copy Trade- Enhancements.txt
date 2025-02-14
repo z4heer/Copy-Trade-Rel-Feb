@@ -1,0 +1,1131 @@
+# Custom API
+1- APIConnect
+POST /accounts/loginvendor/{vendorID}
+from APIConnect.APIConnect import APIConnect
+api_connect = APIConnect(apiKey, api_secret_password, reqId, downloadContract=True, 'settings.ini')
+Body parameter
+{
+  "pwd": "string"
+}
+200 Response
+
+{
+  "msg": "string",
+  "success": false
+}
+
+2- POST /accounts/logindata
+from APIConnect.APIConnect import APIConnect
+api_connect = APIConnect(apiKey, api_secret_password, reqId, downloadContract=True, 'settings.ini')
+response = api_connect.GetLoginData()
+200 Response
+
+{
+  "appID": "663051cfbac7d699a1c59b96048b50e7",
+  "config": {},
+  "msgID": "aeae1389-9784-4b23-9774-f0a63f3074d6",
+  "srvTm": "string",
+  "data": {
+    "type": "string",
+    "auth": "string",
+    "lgnData": {
+      "accTyp": "EQ",
+      "mrgSts": "COMPLETED",
+      "othAccDts": {
+        "accTyp": "string",
+        "isAct": false,
+        "isOnline": false,
+        "uid": "string"
+      },
+      "mrgPopUp": false,
+      "mrgAccDts": {
+        "uids": [
+          {
+            "accTyp": "string",
+            "uid": "string",
+            "alwd": false
+          }
+        ],
+        "phNos": [
+          "string"
+        ],
+        "emIds": [
+          "string"
+        ]
+      },
+      "prefAccTyp": "string",
+      "excs": [
+        "string"
+      ],
+      "dfPrds": {
+        "nse": {
+          "by": "string",
+          "sl": "string"
+        },
+        "bse": {
+          "by": "string",
+          "sl": "string"
+        },
+        "nfo": {
+          "by": "string",
+          "sl": "string"
+        },
+        "bfo": {
+          "by": "string",
+          "sl": "string"
+        },
+        "cds": {
+          "by": "string",
+          "sl": "string"
+        },
+        "mcx": {
+          "by": "string",
+          "sl": "string"
+        },
+        "ncdex": {
+          "by": "string",
+          "sl": "string"
+        }
+      },
+      "dfPrdsMTF": {
+        "nse": {
+          "by": "string",
+          "sl": "string"
+        },
+        "bse": {
+          "by": "string",
+          "sl": "string"
+        },
+        "nfo": {
+          "by": "string",
+          "sl": "string"
+        },
+        "bfo": {
+          "by": "string",
+          "sl": "string"
+        },
+        "cds": {
+          "by": "string",
+          "sl": "string"
+        },
+        "mcx": {
+          "by": "string",
+          "sl": "string"
+        },
+        "ncdex": {
+          "by": "string",
+          "sl": "string"
+        }
+      },
+      "ordTypes": [
+        {
+          "key": "string",
+          "value": "string"
+        }
+      ],
+      "sts": "OK",
+      "accs": {
+        "eqBrkCode": "string",
+        "coBrkCode": "string",
+        "eqBrId": "string",
+        "coBrId": "string",
+        "llt": "string",
+        "eqAccID": "string",
+        "eqAccName": "string",
+        "coAccID": "string",
+        "coAccName": "string",
+        "uid": "string",
+        "eqBrk": "string",
+        "coBrk": "string",
+        "rstpwd": false,
+        "rstusr": false,
+        "eqstwt": false,
+        "costwt": false,
+        "bseMfstwt": false,
+        "eqRmRt": "N",
+        "eqEmpCat": "string",
+        "coEmpCat": "string",
+        "eqAlgoClnt": "string",
+        "prfId": "string",
+        "ucmCd": "string",
+        "eqDob": "string",
+        "coDob": "string",
+        "wtspCnsnt": "string",
+        "eml": "string",
+        "mfInf": false,
+        "cdslEsFlg": false
+      },
+      "qlist": [
+        {
+          "idx": "string",
+          "ques": "string"
+        }
+      ],
+      "mtf": {
+        "sts": "string",
+        "popFl": "string"
+      },
+      "comOpCnst": {
+        "sts": "string",
+        "popFl": "string"
+      },
+      "adhrEQ": {
+        "rlEDt": "string",
+        "rlFl": "string",
+        "sts": "string",
+        "popFl": "string"
+      },
+      "adhrCOM": {
+        "rlEDt": "string",
+        "rlFl": "string",
+        "sts": "string",
+        "popFl": "string"
+      },
+      "cnsntLst": [
+        {
+          "name": "string",
+          "accType": "string",
+          "mdtry": false
+        }
+      ],
+      "prdcts": {
+        "property1": {
+          "property1": [
+            "string"
+          ],
+          "property2": [
+            "string"
+          ]
+        },
+        "property2": {
+          "property1": [
+            "string"
+          ],
+          "property2": [
+            "string"
+          ]
+        }
+      },
+      "prds": [
+        {
+          "exc": "string",
+          "prd": [
+            {
+              "prdDpNm": "string",
+              "prdVal": "string",
+              "validity": [
+                {
+                  "dpNm": "string",
+                  "vaVal": "string"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "val": [
+        {
+          "exc": "string",
+          "validity": [
+            {
+              "dpNm": "string",
+              "vaVal": "string"
+            }
+          ]
+        }
+      ],
+      "gtdGtcValDays": "string",
+      "mndtryCnsts": [
+        {
+          "name": "string",
+          "accType": "string",
+          "mdtry": false
+        }
+      ],
+      "optCnsts": [
+        {
+          "name": "string",
+          "accType": "string",
+          "mdtry": false
+        }
+      ],
+      "srcVendor": "string",
+      "vndSrc": "string",
+      "reqId": "string",
+      "url": "string",
+      "jsessionId": "string",
+      "vndCnstPopUp": false
+    },
+    "time": "string"
+  }
+}
+
+3- Place Trade
+from APIConnect.APIConnect import APIConnect 
+        
+api_connect = APIConnect(apiKey, api_secret_password, reqId, downloadContract=True, 'settings.ini')
+
+from constants.exchange import ExchangeEnum
+from constants.order_type import OrderTypeEnum
+from constants.product_code import ProductCodeENum
+from constants.duration import DurationEnum
+from constants.action import ActionEnum
+
+response = api_connect.PlaceTrade(Trading_Symbol = "INE090A01021", Exchange = ExchangeEnum.NSE, Action = ActionEnum.BUY, Duration = DurationEnum.DAY, Order_Type = OrderTypeEnum.MARKET, Quantity = 1, Streaming_Symbol = "4963_NSE", Limit_Price = "400", Disclosed_Quantity="0", TriggerPrice="0", ProductCode = ProductCodeENum.CNC)
+Body parameter
+
+{
+  "trdSym": "INE843F01014",
+  "exc": "BSE",
+  "action": "BUY",
+  "dur": "DAY",
+  "flQty": 0,
+  "ordTyp": "MARKET",
+  "qty": 1,
+  "dscQty": 0,
+  "sym": "TRICOMFRU",
+  "mktPro": null,
+  "lmPrc": 0,
+  "trgPrc": 0,
+  "prdCode": "MIS",
+  "posSqr": "N",
+  "minQty": 0,
+  "ordSrc": "API",
+  "vnCode": null,
+  "rmk": null,
+  "dtDays": null
+}
+200 Response
+
+//Order after slice 
+        {
+  "appID": "663051cfbac7d699a1c59b96048b50e7",
+  "config": {},
+  "msgID": "aeae1389-9784-4b23-9774-f0a63f3074d6",
+  "srvTm": "string",
+  "data": {
+    "type": "string",
+    "msg": "string",
+    "failedShrs": "string",
+    "ord": [
+      {
+        "lsz": "string",
+        "oid": "string"
+      }
+    ]
+  }
+}
+
+//Order not sliced
+        {
+  "appID": "663051cfbac7d699a1c59b96048b50e7",
+  "config": {},
+  "msgID": "aeae1389-9784-4b23-9774-f0a63f3074d6",
+  "srvTm": "string",
+  "data": {
+    "type": "string",
+    "msg": "string",
+    "oid": "string",
+  }
+}
+401 Response
+
+{
+  "config": {},
+  "error": {
+    "actCd": "52",
+    "errCd": "EGN0011",
+    "errMsg": "Session Expired"
+  },
+  "msgID": "22eb607d-bf65-4a9f-9b59-7f60d0370857",
+  "srvTm": 1623912675844
+}
+4- Modify a Trade for a client
+from APIConnect.APIConnect import APIConnect 
+        
+api_connect = APIConnect(apiKey, api_secret_password, reqId, downloadContract=True, 'settings.ini')
+        
+from constants.exchange import ExchangeEnum
+from constants.order_type import OrderTypeEnum
+from constants.product_code import ProductCodeENum
+from constants.duration import DurationEnum
+from constants.action import ActionEnum
+        
+response = api_connect.ModifyTrade(Trading_Symbol="INE090A01021", Exchange=ExchangeEnum.NSE, Action=ActionEnum.BUY, Duration=DurationEnum.DAY, Order_Type=OrderTypeEnum.LIMIT, Quantity=1, CurrentQuantity=1, Streaming_Symbol="4963_NSE", Limit_Price="620.00", Order_ID=211101000000001, Disclosed_Quantity="0", TriggerPrice="0", ProductCode=ProductCodeENum.CNC)
+PUT /eq/trade/modifytrade/v1/{userID}
+
+Body parameter
+
+{
+  "trdSym": "INE409B01013",
+  "exc": "NSE",
+  "action": "SELL",
+  "dur": "DAY",
+  "flQty": "0",
+  "ordTyp": "LIMIT",
+  "qty": "1",
+  "curQty": "1",
+  "dscQty": "0",
+  "sym": "11909_NSE",
+  "mktPro": "",
+  "lmPrc": "200.0",
+  "trgPrc": "",
+  "prdCode": "CNC",
+  "dtDays": "",
+  "nstOID": "76578587"
+}
+200 Response
+
+//Order after slice 
+        {
+  "appID": "663051cfbac7d699a1c59b96048b50e7",
+  "config": {},
+  "msgID": "aeae1389-9784-4b23-9774-f0a63f3074d6",
+  "srvTm": "string",
+  "data": {
+    "type": "string",
+    "msg": "string",
+    "failedShrs": "string",
+    "ord": [
+      {
+        "lsz": "string",
+        "oid": "string"
+      }
+    ]
+  }
+}
+
+//Order not sliced
+        {
+  "appID": "663051cfbac7d699a1c59b96048b50e7",
+  "config": {},
+  "msgID": "aeae1389-9784-4b23-9774-f0a63f3074d6",
+  "srvTm": "string",
+  "data": {
+    "type": "string",
+    "msg": "string",
+    "oid": "string",
+  }
+}
+
+5- Cancel a trade for a client
+from APIConnect.APIConnect import APIConnect
+
+api_connect = APIConnect(apiKey, api_secret_password, reqId, downloadContract=True, 'settings.ini')
+
+from constants.exchange import ExchangeEnum
+from constants.order_type import OrderTypeEnum
+from constants.product_code import ProductCodeENum
+
+response = api_connect.CancelTrade(Order_ID=211101000000001, Exchange=ExchangeEnum.MCX, Order_Type=OrderTypeEnum.LIMIT, Product_Code=ProductCodeENum.CNC)
+Body parameter
+
+{
+  "dur": "DAY",
+  "vlDt": "string",
+  "sym": "string",
+  "lmPrc": "string",
+  "ordTyp": "LIMIT",
+  "action": "BUY",
+  "prdCode": "M",
+  "exc": "MCX",
+  "qty": "string",
+  "trdSym": "string",
+  "trgPrc": "string",
+  "dsQty": "string",
+  "rmk": "string",
+  "locInd": "MOB",
+  "ordSrc": "MOB",
+  "vnCode": "string",
+  "flQty": "string",
+  "nstOID": "string",
+  "nstReqID": "string",
+  "flID": "string",
+  "prdCodeCh": "M"
+}
+Parameters
+Name	In	Type	Required	Description
+userID	path	string	true	USER ID of the client
+body	body		true	nstOID , exc, prdCode & ordTyp are mandatory
+Example responses
+
+200 Response
+
+{
+  "appID": "663051cfbac7d699a1c59b96048b50e7",
+  "config": {},
+  "msgID": "aeae1389-9784-4b23-9774-f0a63f3074d6",
+  "srvTm": "string",
+  "data": {
+    "type": "string",
+    "msg": "string",
+    "oid": "string"
+  }
+}
+6- Position squareOff API For Equity
+from APIConnect.APIConnect import APIConnect
+
+api_connect = APIConnect(apiKey, api_secret_password, reqId, downloadContract=True, 'settings.ini')
+
+from constants.exchange import ExchangeEnum
+from constants.action import ActionEnum
+from constants.order_type import OrderTypeEnum
+from constants.product_code import ProductCodeENum
+from constants.duration import DurationEnum
+from APIConnect.order import Order
+
+orderlist = [
+ Order(
+  Exchange=ExchangeEnum.NSE,
+  TradingSymbol="TATCHE",
+  StreamingSymbol="3405_NSE",
+  Action=ActionEnum.BUY,
+  ProductCode=ProductCodeENum.CNC,
+  Duration=DurationEnum.DAY,
+  Price="307",
+  TriggerPrice="307",
+  OrderType=OrderTypeEnum.LIMIT,          	
+  Quantity=2,
+  DisclosedQuantity="1",
+  GTDDate="NA",
+  Remark="UserRemarksTesting"             	
+  ),             	      	
+  Order(
+  Exchange=ExchangeEnum.NSE,
+  TradingSymbol="TATCHE",
+  StreamingSymbol="TATACHEM",
+  Action=ActionEnum.BUY,
+  ProductCode=ProductCodeENum.CNC,
+  OrderType=OrderTypeEnum.LIMIT,
+  Duration=DurationEnum.DAY,
+  Price="306",
+  TriggerPrice="306",
+  Quantity=2,
+  DisclosedQuantity="1",
+  GTDDate="NA",
+  Remark="UserRemarksTesting"
+  )          	
+]
+
+response = api_connect.PositionSquareOff(orderlist=orderlist)
+POST /eq/trade/position/sqroff/v1/{userID}
+
+Body parameter
+
+{
+  "sqrLst": [
+    {
+      "trdSym": "INE438A01022",
+      "exc": "NSE",
+      "action": "SELL",
+      "dur": "DAY",
+      "flQty": "0",
+      "ordTyp": "MARKET",
+      "qty": "1",
+      "dscQty": "0",
+      "sym": "163_NSE",
+      "mktPro": "",
+      "lmPrc": "0",
+      "trgPrc": "0",
+      "prdCode": "CO",
+      "dtDays": null,
+      "posSqr": "",
+      "minQty": "0",
+      "ordSrc": "TX3",
+      "vnCode": "",
+      "rmk": ""
+    }
+  ]
+}
+Parameters
+Name	In	Type	Required	Description
+userID	path	string	true	UserId of the client
+body	body		true	Position square off Request Fields
+Example responses
+
+200 Response
+
+{
+  "appID": "663051cfbac7d699a1c59b96048b50e7",
+  "config": {},
+  "msgID": "aeae1389-9784-4b23-9774-f0a63f3074d6",
+  "srvTm": "string",
+  "data": {
+    "type": "string",
+    "posSqrOffs": [
+      {
+        "errMsg": "string",
+        "errCd": "string",
+        "actCd": "string",
+        "msg": "string",
+        "oid": "string"
+      }
+    ]
+  }
+}
+
+
+7- Show order book for a client in equity (including BO)
+from APIConnect.APIConnect import APIConnect
+api_connect = APIConnect(apiKey, api_secret_password, reqId, downloadContract=True, 'settings.ini')
+api_connect.OrderBook()
+200 Response
+
+{
+  "appID": "663051cfbac7d699a1c59b96048b50e7",
+  "config": {},
+  "msgID": "aeae1389-9784-4b23-9774-f0a63f3074d6",
+  "srvTm": "string",
+  "data": {
+    "type": "string",
+    "ord": [
+      {
+        "lstPos": 0,
+        "stkPrc": "string",
+        "isCOSecLeg": "string",
+        "dur": "string",
+        "vlDt": "string",
+        "rcvTim": "string",
+        "rcvEpTim": "string",
+        "sym": "string",
+        "cpName": "string",
+        "exit": "string",
+        "syomID": "string",
+        "exc": "string",
+        "ntQty": "string",
+        "dpName": "string",
+        "cancel": "string",
+        "sipID": "string",
+        "nstReqID": "string",
+        "ordTyp": "LIMIT",
+        "qtyUnits": "string",
+        "opTyp": "string",
+        "trsTyp": "string",
+        "srs": "string",
+        "reqQty": "string",
+        "prdCode": "CNC",
+        "ogt": "string",
+        "flQty": "string",
+        "trdSym": "string",
+        "edit": "string",
+        "asTyp": "string",
+        "trgPrc": "string",
+        "avgPrc": "string",
+        "dsQty": "string",
+        "ordID": "string",
+        "sts": "string",
+        "dpInsTyp": "string",
+        "rjRsn": "string",
+        "userID": "string",
+        "dpExpDt": "string",
+        "ltSz": "string",
+        "tkSz": "string",
+        "desc": "string",
+        "prc": "string",
+        "exONo": "string",
+        "exp": "string",
+        "rcvDt": "string",
+        "pdQty": "string",
+        "userCmnt": "string",
+        "isSL": false,
+        "isTgt": false,
+        "flId": "string",
+        "rmk": "string",
+        "boSeqId": "string",
+        "epochTim": "string",
+        "ordTim": "string",
+        "trgId": "string",
+        "dpVal": "string",
+        "cta": "string",
+        "ltp": "string",
+        "vndSrc": "string",
+        "bsktOrdId": "string",
+        "bsktEpch": "string",
+        "brkOrd": [
+          {
+            "flLg": {
+              "lstPos": 0,
+              "stkPrc": "string",
+              "isCOSecLeg": "string",
+              "dur": "DAY",
+              "vlDt": "string",
+              "rcvTim": "string",
+              "rcvEpTim": "string",
+              "sym": "string",
+              "cpName": "string",
+              "exit": "string",
+              "syomID": "string",
+              "exc": "string",
+              "ntQty": "string",
+              "dpName": "string",
+              "cancel": "string",
+              "sipID": "string",
+              "nstReqID": "string",
+              "ordTyp": "LIMIT",
+              "qtyUnits": "string",
+              "opTyp": "string",
+              "trsTyp": "string",
+              "srs": "string",
+              "reqQty": "string",
+              "prdCode": "CNC",
+              "ogt": "string",
+              "flQty": "string",
+              "trdSym": "string",
+              "edit": "string",
+              "asTyp": "string",
+              "trgPrc": "string",
+              "avgPrc": "string",
+              "dsQty": "string",
+              "ordID": "string",
+              "sts": "string",
+              "dpInsTyp": "string",
+              "rjRsn": "string",
+              "userID": "string",
+              "dpExpDt": "string",
+              "ltSz": "string",
+              "tkSz": "string",
+              "desc": "string",
+              "prc": "string",
+              "exONo": "string",
+              "exp": "string",
+              "rcvDt": "string",
+              "pdQty": "string",
+              "userCmnt": "string",
+              "isSL": false,
+              "isTgt": false,
+              "flId": "string",
+              "rmk": "string",
+              "boSeqId": "string",
+              "epochTim": "string",
+              "ordTim": "string",
+              "trgId": "string",
+              "dpVal": "string",
+              "cta": "string",
+              "ltp": "string",
+              "vndSrc": "string",
+              "bsktOrdId": "string",
+              "bsktEpch": "string"
+            },
+            "slLg": {
+              "lstPos": 0,
+              "stkPrc": "string",
+              "isCOSecLeg": "string",
+              "dur": "DAY",
+              "vlDt": "string",
+              "rcvTim": "string",
+              "rcvEpTim": "string",
+              "sym": "string",
+              "cpName": "string",
+              "exit": "string",
+              "syomID": "string",
+              "exc": "string",
+              "ntQty": "string",
+              "dpName": "string",
+              "cancel": "string",
+              "sipID": "string",
+              "nstReqID": "string",
+              "ordTyp": "LIMIT",
+              "qtyUnits": "string",
+              "opTyp": "string",
+              "trsTyp": "string",
+              "srs": "string",
+              "reqQty": "string",
+              "prdCode": "CNC",
+              "ogt": "string",
+              "flQty": "string",
+              "trdSym": "string",
+              "edit": "string",
+              "asTyp": "string",
+              "trgPrc": "string",
+              "avgPrc": "string",
+              "dsQty": "string",
+              "ordID": "string",
+              "sts": "string",
+              "dpInsTyp": "string",
+              "rjRsn": "string",
+              "userID": "string",
+              "dpExpDt": "string",
+              "ltSz": "string",
+              "tkSz": "string",
+              "desc": "string",
+              "prc": "string",
+              "exONo": "string",
+              "exp": "string",
+              "rcvDt": "string",
+              "pdQty": "string",
+              "userCmnt": "string",
+              "isSL": false,
+              "isTgt": false,
+              "flId": "string",
+              "rmk": "string",
+              "boSeqId": "string",
+              "epochTim": "string",
+              "ordTim": "string",
+              "trgId": "string",
+              "dpVal": "string",
+              "cta": "string",
+              "ltp": "string",
+              "vndSrc": "string",
+              "bsktOrdId": "string",
+              "bsktEpch": "string"
+            },
+            "tgtLg": {
+              "lstPos": 0,
+              "stkPrc": "string",
+              "isCOSecLeg": "string",
+              "dur": "DAY",
+              "vlDt": "string",
+              "rcvTim": "string",
+              "rcvEpTim": "string",
+              "sym": "string",
+              "cpName": "string",
+              "exit": "string",
+              "syomID": "string",
+              "exc": "string",
+              "ntQty": "string",
+              "dpName": "string",
+              "cancel": "string",
+              "sipID": "string",
+              "nstReqID": "string",
+              "ordTyp": "LIMIT",
+              "qtyUnits": "string",
+              "opTyp": "string",
+              "trsTyp": "string",
+              "srs": "string",
+              "reqQty": "string",
+              "prdCode": "CNC",
+              "ogt": "string",
+              "flQty": "string",
+              "trdSym": "string",
+              "edit": "string",
+              "asTyp": "string",
+              "trgPrc": "string",
+              "avgPrc": "string",
+              "dsQty": "string",
+              "ordID": "string",
+              "sts": "string",
+              "dpInsTyp": "string",
+              "rjRsn": "string",
+              "userID": "string",
+              "dpExpDt": "string",
+              "ltSz": "string",
+              "tkSz": "string",
+              "desc": "string",
+              "prc": "string",
+              "exONo": "string",
+              "exp": "string",
+              "rcvDt": "string",
+              "pdQty": "string",
+              "userCmnt": "string",
+              "isSL": false,
+              "isTgt": false,
+              "flId": "string",
+              "rmk": "string",
+              "boSeqId": "string",
+              "epochTim": "string",
+              "ordTim": "string",
+              "trgId": "string",
+              "dpVal": "string",
+              "cta": "string",
+              "ltp": "string",
+              "vndSrc": "string",
+              "bsktOrdId": "string",
+              "bsktEpch": "string"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
+222 Response
+
+{
+  "appID": "663051cfbac7d699a1c59b96048b50e7",
+  "config": {},
+  "error": {
+    "actCd": "54",
+    "errCd": "ETRD0007",
+    "errMsg": "Seems like there are no orders in your order book"
+  },
+  "msgID": "6a4b455e-26aa-4bce-9d4c-206eb56e4672",
+  "srvTm": 1623912574579
+}
+8- Shows order details for a client in equity
+from APIConnect.APIConnect import APIConnect
+        
+api_connect = APIConnect(apiKey, api_secret_password, reqId, downloadContract=True, 'settings.ini')
+
+from constants.exchange import ExchangeEnum
+
+response = api_connect.OrderDetails(OrderId= 211101000000001, Exchange=ExchangeEnum.NSE)
+200 Response
+
+{
+  "appID": "663051cfbac7d699a1c59b96048b50e7",
+  "config": {},
+  "msgID": "aeae1389-9784-4b23-9774-f0a63f3074d6",
+  "srvTm": "string",
+  "data": {
+    "type": "string",
+    "ord": [
+      {
+        "exc": "string",
+        "ordID": "string",
+        "nstReqID": "string",
+        "trsTyp": "string",
+        "symName": "string",
+        "scName": "string",
+        "prcTF": "string",
+        "avgPrc": "string",
+        "trgPrc": "string",
+        "qtyTF": "string",
+        "unFlSz": "string",
+        "dsQty": "string",
+        "exOID": "string",
+        "sts": "string",
+        "tim": "string",
+        "txt": "string",
+        "prcTyp": "string",
+        "dur": "string",
+        "prdCode": "CNC"
+      }
+    ]
+  }
+}
+9- Retrieving CNC and MTF RMS holdings response for a particular client
+Code samples
+
+from APIConnect.APIConnect import APIConnect
+api_connect = APIConnect(apiKey, api_secret_password, reqId, downloadContract=True, 'settings.ini')
+api_connect.Holdings()
+200 Response
+
+{
+  "appID": "663051cfbac7d699a1c59b96048b50e7",
+  "config": {},
+  "msgID": "aeae1389-9784-4b23-9774-f0a63f3074d6",
+  "srvTm": "string",
+  "data": {
+    "type": "string",
+    "eqHv": "string",
+    "rmsHdg": [
+      {
+        "asTyp": "string",
+        "cpName": "string",
+        "dpName": "string",
+        "exc": "string",
+        "isin": "string",
+        "ltSz": "string",
+        "ltp": "string",
+        "tkSz": "string",
+        "trdSym": "string",
+        "totalQty": "string",
+        "totalVal": "string",
+        "sym": "string",
+        "cncRmsHdg": {
+          "td": "string",
+          "hdgVl": "string",
+          "clUQty": "string",
+          "hdgUQty": "string",
+          "usdQty": "string",
+          "t1HQty": "string",
+          "clQty": "string",
+          "qty": "string",
+          "pdQty": "string",
+          "pdCnt": "string",
+          "sym": "string",
+          "totQty": "string"
+        },
+        "mtfRmsHdg": {
+          "td": "string",
+          "hdgVl": "string",
+          "clUQty": "string",
+          "hdgUQty": "string",
+          "usdQty": "string",
+          "t1HQty": "string",
+          "clQty": "string",
+          "qty": "string",
+          "pdQty": "string",
+          "pdCnt": "string",
+          "sym": "string",
+          "totQty": "string"
+        }
+      }
+    ]
+  }
+}
+
+10- Retrieving NetPositions for a particular client
+from APIConnect.APIConnect import APIConnect
+api_connect = APIConnect(apiKey, api_secret_password, reqId, downloadContract=True, 'settings.ini')
+api_connect.NetPosition()
+200 Response
+
+{
+  "appID": "663051cfbac7d699a1c59b96048b50e7",
+  "config": {},
+  "msgID": "aeae1389-9784-4b23-9774-f0a63f3074d6",
+  "srvTm": "string",
+  "data": {
+    "type": "string",
+    "pos": [
+      {
+        "sym": "string",
+        "ltp": "string",
+        "ltt": "string",
+        "chg": "string",
+        "chgP": "string",
+        "exc": "string",
+        "vol": "string",
+        "dpName": "string",
+        "trdSym": "string",
+        "asTyp": "string",
+        "ltSz": "string",
+        "tkSz": "string",
+        "dpInsTyp": "string",
+        "desc": "string",
+        "dpVal": "string",
+        "stkPrc": "string",
+        "opTyp": "string",
+        "exp": "string",
+        "dpExpDt": "string",
+        "opInt": "string",
+        "opIntChg": "string",
+        "opIntChgP": "string",
+        "spot": "string",
+        "rlOvrP": "string",
+        "rlCAbs": "string",
+        "trsTyp": "string",
+        "prdCode": "CNC",
+        "avgSlPrc": "string",
+        "avgByPrc": "string",
+        "byAmt": "string",
+        "byQty": "string",
+        "slAmt": "string",
+        "slQty": "string",
+        "ntQty": "string",
+        "ntAmt": "string",
+        "rlzPL": "string",
+        "urlzPL": "string",
+        "ntPL": "string",
+        "mtm": "string",
+        "prc": "string",
+        "sqOff": "string",
+        "mul": "string",
+        "cpName": "string",
+        "rchFlg": "string",
+        "nwsFlg": "string",
+        "cfAvgSlPrc": "string",
+        "cfAvgByPrc": "string",
+        "cfSlQty": "string",
+        "cfByQty": "string",
+        "cfSlAmt": "string",
+        "cfByAmt": "string",
+        "ntSlQty": "string",
+        "ntByQty": "string",
+        "ntSlAmt": "string",
+        "ntByAmt": "string",
+        "brkEvnPrc": "string",
+        "uniqKey": "string",
+        "pn": "string",
+        "gn": "string",
+        "gd": "string",
+        "pd": "string"
+      }
+    ],
+    "ntMTM": "string",
+    "tdyMtm": "string",
+    "urlMtm": "string",
+    "npos": "string",
+    "opn": "string",
+    "cls": "string"
+  }
+}
+222 Response
+
+{
+  "appID": "663051cfbac7d699a1c59b96048b50e7",
+  "config": {},
+  "error": {
+    "actCd": "54",
+    "errCd": "ETRD0004",
+    "errMsg": "Seems like there are no positions in your account currently"
+  },
+  "msgID": "06bd0d76-574c-40c6-ae04-fed4261fd968",
+  "srvTm": 1624426313506
+}
+11- Shows trade book for a client in equity
+Code samples
+
+from APIConnect.APIConnect import APIConnect
+api_connect = APIConnect(apiKey, api_secret_password, reqId, downloadContract=True, 'settings.ini')
+api_connect.TradeBook()
+200 Response
+
+{
+  "appID": "663051cfbac7d699a1c59b96048b50e7",
+  "config": {},
+  "msgID": "aeae1389-9784-4b23-9774-f0a63f3074d6",
+  "srvTm": "string",
+  "data": {
+    "trade": [
+      {
+        "ordTim": "string",
+        "trdSym": "string",
+        "exONo": "string",
+        "dpInsTyp": "string",
+        "ntPrc": "string",
+        "rmk": "string",
+        "dpExpDt": "string",
+        "ltSz": "string",
+        "cpName": "string",
+        "prdCode": "CNC",
+        "flTim": "string",
+        "flDt": "string",
+        "flLeg": "string",
+        "flID": "string",
+        "fldQty": "string",
+        "psCnv": "string",
+        "qty": "string",
+        "rjRsn": "string",
+        "opTyp": "string",
+        "sym": "string",
+        "dpName": "string",
+        "ordID": "string",
+        "trsTyp": "string",
+        "stkPrc": "string",
+        "exc": "string",
+        "chgP": "string",
+        "sts": "string",
+        "asTyp": "string",
+        "tkSz": "string",
+        "ordType": "string",
+        "trdID": "string",
+        "ltp": "string",
+        "flQty": "string",
+        "chg": "string",
+        "srs": "string",
+        "rcvTim": "string",
+        "nstReqID": "string",
+        "flPrc": "string",
+        "exp": "string",
+        "qtyUnits": "string",
+        "epochTim": "string"
+      }
+    ]
+  }
+}
+222 Response
+
+{
+  "appID": "663051cfbac7d699a1c59b96048b50e7",
+  "config": {},
+  "error": {
+    "actCd": "54",
+    "errCd": "ETRD0002",
+    "errMsg": "Seems like there are no trades in your trade book."
+  },
+  "msgID": "001a05a5-c2ce-405a-a5b2-a1783fbf1849",
+  "srvTm": 1623915376485
+}

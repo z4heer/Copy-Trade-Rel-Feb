@@ -1,0 +1,7 @@
+frontend/copy-trading-app/.angular/
+frontend/copy-trading-app/.vscode/
+frontend/copy-trading-app/node_modules/
+# Ignore Python cache and virtual environment directories
+backend/__pycache__/
+backend/venv/
+backend/.idea/

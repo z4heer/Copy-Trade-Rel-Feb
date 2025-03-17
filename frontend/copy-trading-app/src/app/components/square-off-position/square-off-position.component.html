@@ -1,0 +1,77 @@
+<div class="square-off-position">
+    <h2>Position Square Off</h2>
+    <form [formGroup]="squareOffForm" (ngSubmit)="squareOff()">
+      <div formArrayName="sqrLst">
+        <div *ngFor="let sqr of sqrLst.controls; let i = index" [formGroupName]="i">
+          <div>
+            <label for="TradingSymbol">Trading Symbol</label>
+            <input id="TradingSymbol" formControlName="TradingSymbol" type="text" />
+          </div>
+          <div>
+            <label for="Exchange">Exchange</label>
+            <select id="Exchange" formControlName="Exchange">
+              <option value="NSE">NSE</option>
+              <option value="BSE">BSE</option>
+            </select>
+          </div>
+          <div>
+            <label for="Action">BUY/SELL</label>
+            <select id="Action" formControlName="Action">
+              <option value="BUY">BUY</option>
+              <option value="SELL">SELL</option>
+            </select>
+          </div>
+          <div>
+            <label for="Duration">Duration</label>
+            <select id="Duration" formControlName="Duration">
+              <option value="DAY">DAY</option>
+              <option value="IOC">IOC</option>
+            </select>
+          </div>
+          <div>
+            <label for="OrderType">Order Type</label>
+            <select id="OrderType" formControlName="OrderType">
+              <option value="LIMIT">LIMIT</option>
+              <option value="MARKET">MARKET</option>
+            </select>
+          </div>
+          <div>
+            <label for="Quantity">Quantity</label>
+            <input id="Quantity" formControlName="Quantity" type="number" />
+          </div>
+          <div>
+            <label for="ProductCode">Product Code</label>
+            <input id="ProductCode" formControlName="ProductCode" type="text" />
+          </div>
+          <div>
+            <label for="StreamingSymbol">Streaming Symbol</label>
+            <input id="StreamingSymbol" formControlName="StreamingSymbol" type="text" />
+          </div>
+          <div>
+            <label for="Price">Price</label>
+            <input id="Price" formControlName="Price" type="number" />
+          </div>
+          <div>
+            <label for="DisclosedQuantity">Disclosed Quantity</label>
+            <input id="DisclosedQuantity" formControlName="DisclosedQuantity" type="number" />
+          </div>
+          <div>
+            <label for="GTDDate">GTD Date</label>
+            <input id="GTDDate" formControlName="GTDDate" type="text" value="NA" />
+          </div>
+          <div>
+            <label for="Remark">Remark</label>
+            <input id="Remark" formControlName="Remark" type="text" value="Closing positions" />
+          </div>
+          <div>
+            <label for="TriggerPrice">Trigger Price</label>
+            <input id="TriggerPrice" formControlName="TriggerPrice" type="number" />
+          </div>
+        </div>
+      </div>
+      <div>
+        <button type="submit">Square Off Position</button>
+      </div>
+    </form>
+    <div *ngIf="error" class="error">{{ error }}</div>
+  </div>

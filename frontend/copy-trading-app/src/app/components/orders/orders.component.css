@@ -1,0 +1,17 @@
+.order-book {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    justify-content: center;
+  }
+  
+  .order-book h1 {
+    color: #2c3e50;
+  }
+  
+  .order-book .error {
+    color: red;
+  }
+  
+  .order-book div {
+    margin-bottom: 20px;
+  }

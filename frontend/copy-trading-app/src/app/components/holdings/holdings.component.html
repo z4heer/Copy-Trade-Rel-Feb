@@ -1,0 +1,35 @@
+<div class="holdings">
+  <div *ngIf="error" class="error">{{ error }}</div>
+  <table *ngIf="holdings.length > 0">
+    <thead>
+      <tr><th colspan="8"><h2>Holdings</h2></th></tr>
+
+      <tr>
+        <th>Symbol</th>
+        <th>Trading Symbol</th>
+        <th>Exchange</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Product Code</th>
+        <th>Streaming Symbol</th>
+        <th>User ID</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let holding of holdings">
+        <td>{{ holding.Symbol }}</td>
+        <td>{{ holding.TradingSymbol }}</td>
+        <td>{{ holding.Exchange }}</td>
+        <td>{{ holding.BuyQuantity }}</td>
+        <td>{{ holding.BuyPrice }}</td>
+        <td>{{ holding.ProductCode }}</td>
+        <td>{{ holding.StreamingSymbol }}</td>
+        <td>{{ holding.userid }}</td>
+        <td>
+          <button (click)="call_squareoff(holding)">Square Off</button>
+      </tr>
+    </tbody>
+  </table>
+
+</div>

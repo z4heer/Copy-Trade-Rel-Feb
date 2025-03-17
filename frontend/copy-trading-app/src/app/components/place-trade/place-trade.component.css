@@ -1,0 +1,51 @@
+.place-trade {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh; /* Ensure the component takes the full height of the viewport */
+  padding: 20px;
+  text-align: center; /* Center-align text */
+}
+
+.place-trade h2 {
+  margin-bottom: 20px; /* Add spacing below the heading */
+}
+
+.place-trade form {
+  width: 100%;
+  max-width: 600px; /* Limit the maximum width of the form */
+}
+
+.place-trade table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.place-trade td {
+  padding: 10px;
+  vertical-align: top;
+  text-align: left; /* Left-align table cells */
+}
+
+.place-trade label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.place-trade input,
+.place-trade select {
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.place-trade .error {
+  color: red;
+  margin-top: 20px; /* Add spacing above the error message */
+}
+
+.place-trade button {
+  display: block;
+  margin: 0 auto; /* Center-align the button */
+}

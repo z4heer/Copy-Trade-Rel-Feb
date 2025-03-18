@@ -22,7 +22,7 @@ def save_user_data():
 def add_user(userid: str, active: bool, reqId: str, username: str, apiKey: str, api_secret_password: str):
     """Add a new user to the user_data DataFrame and save to Excel."""
     global user_data
-    new_user = pd.DataFrame([[userid, active, reqId, username, apiKey, api_secret_password]], columns=user_data.columns)
+    new_user = pd.DataFrame([[apiKey, api_secret_password,reqId,userid,username,active,"FALSE"]], columns=user_data.columns)
     user_data = pd.concat([user_data, new_user], ignore_index=True)
     save_user_data()
     logger.info(f"User {userid} added successfully.")

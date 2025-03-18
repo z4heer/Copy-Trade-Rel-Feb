@@ -5,3 +5,4 @@ frontend/copy-trading-app/node_modules/
 backend/__pycache__/
 backend/venv/
 backend/.idea/
+backend/config/users.xlsx

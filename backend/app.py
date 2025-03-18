@@ -6,8 +6,8 @@ import pandas as pd
 import logging
 from flask_cors import CORS
 
-from users import add_user, modify_user, delete_user, modify_requestid, modify_status
-from transform import transformed_orderbook, transformed_tradebook
+from users import add_user, modify_user, delete_user, modify_status, load_user_data, save_user_data, get_user_info, \
+    get_user_info_1, load_all_user_data
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS
@@ -17,16 +17,21 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 # Load user data from users.xlsx
-try:
-    user_data = pd.read_excel('conf/users.xlsx')
-    user_data['userid'] = user_data['userid'].astype(str).str.strip()
-    user_data['active'] = user_data['active'].astype(bool)
-except Exception as e:
-    logger.error(f"Error loading user data: {e}")
-    raise
+user_data = load_user_data()
 
-def get_active_users():
+def get_active_users(user_data):
+    # Ensure 'active' column is boolean type
+    user_data['active'] = user_data['active'].astype(bool)
     return user_data[user_data['active']]
+
+@app.route('/api/users', methods=['GET'])
+def get_users():
+    try:
+        active_users = get_active_users(user_data).to_dict(orient='records')
+        return jsonify(active_users)
+    except Exception as e:
+        logger.error(f"Error in get_users: {e}")
+        return jsonify({"error": str(e)}), 500
 
 @app.route('/api/accounts/loginvendor', methods=['POST'])
 def login_vendor():
@@ -44,7 +49,7 @@ def login_data():
         if not userid:
             raise ValueError("Missing userid")
 
-        user_info = get_user_info(userid)
+        user_info = get_user_info(user_data, userid)
         if user_info is None:
             return jsonify({"error": "User not found or not active"}), 404
 
@@ -58,16 +63,14 @@ def login_data():
 @app.route('/api/place_trade', methods=['POST'])
 def place_trade():
     try:
-        #trade_data = request.json.get('trade_data')
         trade_data = request.json
         if not trade_data:
             raise ValueError("Missing trade data")
         if 'symbol' in trade_data:
             del trade_data['symbol']
-        active_users = get_active_users()
+        active_users = get_active_users(user_data)
         responses = []
         for _, user_info in active_users.iterrows():
-            # Validate and convert enum fields
             trade_data = APIConnectWrapper.validate_and_convert_trade_data(trade_data)
             api_connect = APIConnectWrapper(user_info)
             response = api_connect.place_trade(trade_data)
@@ -84,7 +87,7 @@ def modify_trade(userID):
         if not userid:
             raise ValueError("Missing userid")
 
-        user_info = get_user_info(userid)
+        user_info = get_user_info(user_data, userid)
         if user_info is None:
             return jsonify({"error": "User not found or not active"}), 404
 
@@ -97,7 +100,6 @@ def modify_trade(userID):
         if 'symbol' in trade_data:
             del trade_data['symbol']
 
-        # Validate and convert enum fields
         trade_data = APIConnectWrapper.validate_and_convert_trade_data(trade_data)
 
         api_connect = APIConnectWrapper(user_info)
@@ -114,16 +116,14 @@ def cancel_trade():
         if not userid:
             raise ValueError("Missing userid")
 
-        user_info = get_user_info(userid)
+        user_info = get_user_info(user_data, userid)
         if user_info is None:
             return jsonify({"error": "User not found or not active"}), 404
 
         trade_data = request.json
-        #logger.info(f"cancel_trade()- trade_dat= {trade_data}")
         if not trade_data:
             raise ValueError("Missing trade data")
 
-        # Validate and convert enum fields
         trade_data = APIConnectWrapper.validate_and_convert_trade_data(trade_data)
 
         api_connect = APIConnectWrapper(user_info)
@@ -144,7 +144,7 @@ def position_square_off():
         if not trade_data:
             raise ValueError("Missing trade data")
 
-        active_users = get_active_users()
+        active_users = get_active_users(user_data)
         responses = []
         for _, user_info in active_users.iterrows():
             if 'userid' in trade_data:
@@ -169,7 +169,7 @@ def position_square_off_user_specific():
             raise ValueError("Missing trade data")
 
         trade_data = APIConnectWrapper.validate_and_convert_trade_data(trade_data)
-        user_info = get_user_info(userid)
+        user_info = get_user_info(user_data, userid)
         api_connect = APIConnectWrapper(user_info)
         response = api_connect.position_square_off(trade_data)
         return jsonify(response)
@@ -184,7 +184,7 @@ def order_book():
         if not userid:
             raise ValueError("Missing userid")
 
-        user_info = get_user_info(userid)
+        user_info = get_user_info(user_data, userid)
         if user_info is None:
             return jsonify({"error": "User not found or not active"}), 404
 
@@ -198,23 +198,19 @@ def order_book():
 @app.route('/api/orders', methods=['POST'])
 def orders():
     try:
-        active_users = get_active_users()
+        active_users = get_active_users(user_data)
         all_orders = []
         for _, user_info in active_users.iterrows():
             api_connect = APIConnectWrapper(user_info)
             response = api_connect.order_book()
-            #logger.debug(f"orders()- Received response: {response}")
-        if "eq" in response:
-            response = response["eq"]
-            #logger.debug(f"Extracted 'eq' response: {response}")
-            if "data" in response and "ord" in response["data"]:
-                all_orders.extend(response["data"]["ord"])
+            if "eq" in response:
+                response = response["eq"]
+                if "data" in response and "ord" in response["data"]:
+                    all_orders.extend(response["data"]["ord"])
+                else:
+                    return jsonify({"error": "Invalid response structure / No Data Found"}), 500
             else:
-                #logger.error("Response does not contain 'data' or 'ord' key")
-                return jsonify({"error": "Invalid response structure / No Data Found"}), 500
-        else:
-            #logger.error("Response does not contain 'eq' key")
-            return jsonify({"error": "Invalid response structure"}), 500
+                return jsonify({"error": "Invalid response structure"}), 500
         consolidated_response = {"data": {"ord": all_orders}}
         response_data = transformed_orderbook(consolidated_response)
         return jsonify(response_data), 200
@@ -225,23 +221,19 @@ def orders():
 @app.route('/api/trades', methods=['POST'])
 def trades():
     try:
-        active_users = get_active_users()
+        active_users = get_active_users(user_data)
         all_orders = []
         for _, user_info in active_users.iterrows():
             api_connect = APIConnectWrapper(user_info)
             response = api_connect.order_book()
-            #logger.debug(f"Received response: {response}")
-        if "eq" in response:
-            response = response["eq"]
-            #logger.debug(f"Extracted 'eq' response: {response}")
-            if "data" in response and "ord" in response["data"]:
-                all_orders.extend(response["data"]["ord"])
+            if "eq" in response:
+                response = response["eq"]
+                if "data" in response and "ord" in response["data"]:
+                    all_orders.extend(response["data"]["ord"])
+                else:
+                    return jsonify({"error": "Invalid response structure / No Data Found"}), 500
             else:
-                #logger.error("Response does not contain 'data' or 'ord' key")
-                return jsonify({"error": "Invalid response structure / No Data Found"}), 500
-        else:
-            #logger.error("Response does not contain 'eq' key")
-            return jsonify({"error": "Invalid response structure"}), 500
+                return jsonify({"error": "Invalid response structure"}), 500
         consolidated_response = {"data": {"ord": all_orders}}
         response_data = transformed_tradebook(consolidated_response)
         return jsonify(response_data), 200
@@ -256,7 +248,7 @@ def order_details():
         if not userid:
             raise ValueError("Missing userid")
 
-        user_info = get_user_info(userid)
+        user_info = get_user_info(user_data, userid)
         if user_info is None:
             return jsonify({"error": "User not found or not active"}), 404
 
@@ -265,7 +257,6 @@ def order_details():
         if not order_id:
             raise ValueError("Missing order_id")
 
-        # Validate and convert enum fields
         trade_data = APIConnectWrapper.validate_and_convert_trade_data(trade_data)
 
         exchange = trade_data.get('Exchange')
@@ -286,7 +277,7 @@ def holdings():
         if not userid:
             raise ValueError("Missing userid")
 
-        user_info = get_user_info(userid)
+        user_info = get_user_info(user_data, userid)
         if user_info is None:
             return jsonify({"error": "User not found or not active"}), 404
 
@@ -301,7 +292,7 @@ def holdings():
 @app.route('/api/holdings_all_users', methods=['POST'])
 def holdings_all_users():
     try:
-        active_users = get_active_users()
+        active_users = get_active_users(user_data)
         all_holdings = []
 
         for _, user_info in active_users.iterrows():
@@ -309,16 +300,11 @@ def holdings_all_users():
             api_connect = APIConnectWrapper(user_info)
             response = api_connect.holdings()
 
-            # Log the full response to debug the structure
-            #logger.debug(f"Full response for userid {userid}: {response}")
-            # Ensure the response is a dictionary
             if isinstance(response, str):
                 response = json.loads(response)
 
-            # Check for 'eq', 'data', and 'rmsHdg' keys
             if "eq" in response and "data" in response["eq"] and "rmsHdg" in response["eq"]["data"]:
                 holdings = response["eq"]["data"]["rmsHdg"]
-                #logger.debug(f"holdings for userid {userid}: {holdings}")
 
                 mapped_holdings = [
                     {
@@ -354,7 +340,7 @@ def net_position():
         if not userid:
             raise ValueError("Missing userid")
 
-        user_info = get_user_info(userid)
+        user_info = get_user_info(user_data, userid)
         if user_info is None:
             return jsonify({"error": "User not found or not active"}), 404
 
@@ -375,15 +361,13 @@ def net_position_formatted():
         if not userid:
             raise ValueError("Missing userid")
 
-        user_info = get_user_info(userid)
+        user_info = get_user_info(user_data, userid)
         if user_info is None:
             return jsonify({"error": "User not found or not active"}), 404
 
         api_connect = APIConnectWrapper(user_info)
         response = api_connect.net_position()
-        # Ensure the response is parsed as JSON
         response = json.loads(response)
-        # Mapping the positions to the required format
         positions = response.get("eq", {}).get("data", {}).get("pos", [])
         mapped_positions = [
             {
@@ -414,16 +398,14 @@ def net_position_formatted():
 @app.route('/api/net_position_all_users', methods=['POST'])
 def net_position_all_users():
     try:
-        active_users = get_active_users()
+        active_users = get_active_users(user_data)
         all_positions = []
 
         for _, user_info in active_users.iterrows():
             userid = user_info['userid']
             api_connect = APIConnectWrapper(user_info)
             response = api_connect.net_position()
-            # Ensure the response is parsed as JSON
             response = json.loads(response)
-            # Check for 'eq', 'data', and 'pos' keys
             if "eq" in response and "data" in response["eq"] and "pos" in response["eq"]["data"]:
                 positions = response["eq"]["data"]["pos"]
                 logger.debug(f"positions for userid {userid}: {positions}")
@@ -458,11 +440,11 @@ def net_position_all_users():
         logger.error(f"Error in net_position_all_users: {e}")
         return jsonify({"error": str(e)}), 500
 
-@app.route('/api/users', methods=['GET'])
-def get_users():
+@app.route('/api/all_users', methods=['GET'])
+def get_all_users():
     try:
-        active_users = get_active_users().to_dict(orient='records')
-        return jsonify(active_users)
+        users = load_all_user_data().to_dict(orient='records')
+        return jsonify(users)
     except Exception as e:
         logger.error(f"Error in get_users: {e}")
         return jsonify({"error": str(e)}), 500
@@ -479,23 +461,27 @@ def get_isin():
         return jsonify({"error": error}), 404
 
     return jsonify({"isin": isin})
-    #return jsonify({"symbol": symbol.upper(), "isin": isin})
 
 @app.route('/api/add_user', methods=['POST'])
 def api_add_user():
+    global user_data
     try:
         data = request.get_json()
         userid = data.get('userid')
         active = data.get('active')
-        reqId = data.get('requestid')
+        reqId = data.get('reqId')
         username = data.get('username')
-        apikey = data.get('apikey')
-        apisec = data.get('apisec')
+        apikey = data.get('apiKey')
+        apisec = data.get('api_secret_password')
 
         if not userid or active is None or not reqId or not username:
             return jsonify({"error": "Missing required fields"}), 400
 
-        add_user(userid, active, reqId, username,apikey,apisec)
+        # Check if the userid already exists
+        if userid in user_data['userid'].values:
+            return jsonify({"error": "User with this userid already exists"}), 400
+
+        user_data = add_user(user_data, userid, active, reqId, username, apikey, apisec)
         return jsonify({"message": "User added successfully"}), 200
     except Exception as e:
         logger.error(f"Error in api_add_user: {e}")
@@ -503,36 +489,21 @@ def api_add_user():
 
 @app.route('/api/modify_user', methods=['POST'])
 def api_modify_user():
+    global user_data
     try:
         data = request.get_json()
         userid = data.get('userid')
-
+        logger.debug(f"Modify_user()- {data}")
         if not userid:
             return jsonify({"error": "Missing userid"}), 400
 
         active = data.get('active')
-        reqId = data.get('requestid')
+        reqId = data.get('reqId')
         username = data.get('username')
-        apikey = data.get('apikey')
-        apisec = data.get('apisec')
+        apikey = data.get('apiKey')
+        apisec = data.get('api_secret_password')
 
-        modify_user(userid, active, reqId, username,apikey,apisec)
-        return jsonify({"message": "User modified successfully"}), 200
-    except Exception as e:
-        logger.error(f"Error in api_modify_user: {e}")
-        return jsonify({"error": str(e)}), 500
-
-@app.route('/api/modify_requestid', methods=['POST'])
-def api_modify_requestid():
-    try:
-        data = request.get_json()
-        userid = data.get('userid')
-
-        if not userid:
-            return jsonify({"error": "Missing userid"}), 400
-
-        reqId = data.get('requestid')
-        modify_requestid(userid, reqId)
+        user_data = modify_user(user_data, userid, active, reqId, username, apikey, apisec,False)
         return jsonify({"message": "User modified successfully"}), 200
     except Exception as e:
         logger.error(f"Error in api_modify_user: {e}")
@@ -540,26 +511,28 @@ def api_modify_requestid():
 
 @app.route('/api/validate_user', methods=['POST'])
 def validate():
+    global user_data
     try:
         userid = request.json.get('userid')
         logger.info(f"validate()- userid= {userid}")
         if not userid:
             raise ValueError("Missing userid")
 
-        user_info = get_user_info_1(userid)
+        user_info = get_user_info_1(user_data, userid)
         logger.info(f"user_info= {user_info}")
         if user_info is None:
             return jsonify({"error": "User not found or not active"}), 404
-        modify_status(userid,False)
+        user_data = modify_status(user_data, userid, session_active=False)
         api_connect = APIConnectWrapper(user_info)
-        modify_status(userid,True)
+        user_data = modify_status(user_data, userid, session_active=True)
         return jsonify({"success": "User login and RequestId Validation completed"})
     except Exception as e:
         logger.error(f"Error in login_data: {e}, Please make sure userid and fresh requestid are correct")
-        return jsonify({"error": str(e),"message ": "Please make sure userid and fresh requestid are correct"}), 500
+        return jsonify({"error": str(e), "message": "Please make sure userid and fresh requestid are correct"}), 500
 
 @app.route('/api/delete_user', methods=['POST'])
 def api_delete_user():
+    global user_data
     try:
         data = request.get_json()
         userid = data.get('userid')
@@ -567,55 +540,25 @@ def api_delete_user():
         if not userid:
             return jsonify({"error": "Missing userid"}), 400
 
-        delete_user(userid)
+        user_data = delete_user(user_data, userid)
         return jsonify({"message": "User deleted successfully"}), 200
     except Exception as e:
         logger.error(f"Error in api_delete_user: {e}")
         return jsonify({"error": str(e)}), 500
 
-def get_user_info(userid):
-    userid = str(userid).strip()
-    # Ensure all userids in user_data are stripped and lowercased for comparison
-    user_data['userid'] = user_data['userid'].astype(str).str.strip()
-    user_info = user_data[user_data['userid'] == userid]
-    if not user_info.empty and user_info['active'].iloc[0]:
-        return user_info.iloc[0]
-    return None
-
-def get_user_info_1(userid):
-    userid = str(userid).strip()
-    # Ensure all userids in user_data are stripped and lowercased for comparison
-    user_data['userid'] = user_data['userid'].astype(str).str.strip()
-    user_info = user_data[user_data['userid'] == userid]
-    # Log the matching user_info
-    if not user_info.empty:
-        logger.info(f"get_user_info_1()- Found user_info: {user_info.iloc[0]}")
-    else:
-        logger.info(f"get_user_info()- No matching user found for userid: '{userid}'")
-
-    if not user_info.empty:
-        return user_info.iloc[0]
-    return None
-
-
 def get_isin_from_csv(symbol):
-    """Fetch ISIN from a pre-downloaded NSE Bhavcopy CSV."""
     try:
         df = pd.read_csv("conf/EQUITY_L.csv")
     except FileNotFoundError:
         return None, "CSV file not found. Please download it manually."
-    # Convert columns to uppercase
     df.columns = df.columns.str.upper()
-    # Filter by stock symbol
     stock_data = df[df["SYMBOL"] == symbol.upper()]
 
     if stock_data.empty:
         return None, f"Symbol {symbol} not found in Bhavcopy"
-    # Extract ISIN
     logger.info(f"stock_data= {stock_data}")
     isin = stock_data["ISIN NUMBER"].values[0].strip()
     return isin, None
-
 
 if __name__ == '__main__':
     app.run(debug=True)

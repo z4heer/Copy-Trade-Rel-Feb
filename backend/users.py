@@ -3,84 +3,103 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-# Load user data from users.xlsx
-try:
-    user_data = pd.read_excel('conf/users.xlsx')
-    user_data['userid'] = user_data['userid'].astype(str).str.strip()
-    user_data['active'] = user_data['active'].astype(bool)
-except Exception as e:
-    logger.error(f"Error loading user data: {e}")
-    raise
+def load_user_data():
+    """Load user data from the Excel file."""
+    try:
+        user_data = pd.read_excel('conf/users.xlsx')
+        user_data['userid'] = user_data['userid'].astype(str).str.strip()
+        user_data['active'] = user_data['active'].astype(bool)
+        return user_data
+    except Exception as e:
+        logger.error(f"Error loading user data: {e}")
+        raise
 
-def save_user_data():
+def load_all_user_data():
+    """Load user data from the Excel file."""
+    try:
+        user_data = pd.read_excel('conf/users.xlsx')
+        user_data['userid'] = user_data['userid'].astype(str).str.strip()
+        return user_data
+    except Exception as e:
+        logger.error(f"Error loading user data: {e}")
+        raise
+
+def save_user_data(user_data):
     """Save the user data back to the Excel file."""
     try:
         user_data.to_excel('conf/users.xlsx', index=False)
     except Exception as e:
         logger.error(f"Error saving user data: {e}")
         raise
-def add_user(userid: str, active: bool, reqId: str, username: str, apiKey: str, api_secret_password: str):
+
+def add_user(user_data, userid: str, active: bool, reqId: str, username: str, apiKey: str, api_secret_password: str):
     """Add a new user to the user_data DataFrame and save to Excel."""
-    global user_data
-    new_user = pd.DataFrame([[apiKey, api_secret_password,reqId,userid,username,active,"FALSE"]], columns=user_data.columns)
+    new_user = pd.DataFrame([[apiKey, api_secret_password, reqId, userid, username, bool(active), bool("FALSE")]], columns=user_data.columns)
     user_data = pd.concat([user_data, new_user], ignore_index=True)
-    save_user_data()
+    save_user_data(user_data)
     logger.info(f"User {userid} added successfully.")
+    return user_data
 
-def modify_user(userid: str, active: bool = None, reqId: str = None, username: str = None, apiKey: str = None, api_secret_password: str = None):
+def modify_user(user_data, userid: str, active: bool = None, reqId: str = None, username: str = None
+                , apiKey: str = None, api_secret_password: str = None, session_active: bool = None):
     """Modify an existing user's data in the user_data DataFrame and save to Excel."""
-    global user_data
     if userid not in user_data['userid'].values:
-        logger.error(f"User {userid} not found.")
-        return
+        raise ValueError(f"User {userid} not found.")
 
-    if active is not None:
-        user_data.loc[user_data['userid'] == userid, 'active'] = active
-    if reqId is not None:
-        user_data.loc[user_data['userid'] == userid, 'reqId'] = reqId
-    if username is not None:
-        user_data.loc[user_data['userid'] == userid, 'username'] = username
-    if apiKey is not None:
-        user_data.loc[user_data['userid'] == userid, 'apiKey'] = apiKey
-    if api_secret_password is not None:
-        user_data.loc[user_data['userid'] == userid, 'api_secret_password'] = api_secret_password
-
-    save_user_data()
+    modifications = {
+        'active': active,
+        'reqId': reqId,
+        'username': username,
+        'apiKey': apiKey,
+        'api_secret_password': api_secret_password,
+        'session_active' : session_active
+    }
+    for field, value in modifications.items():
+        if value is not None:
+            if field == 'active' or field == session_active:
+                user_data.loc[user_data['userid'] == userid, field] = bool(value)
+            else:
+                user_data.loc[user_data['userid'] == userid, field] = value
+            user_data.loc[user_data['userid'] == userid, field] = value
+    save_user_data(user_data)
     logger.info(f"User {userid} modified successfully.")
+    return user_data
 
-def modify_requestid(userid: str, reqId: str = None):
-    """Modify an existing user's data in the user_data DataFrame and save to Excel."""
-    global user_data
-    if userid not in user_data['userid'].values:
-        logger.error(f"User {userid} not found.")
-        return
+def modify_status(user_data, userid: str, session_active: bool = None):
+    """Modify an existing user's session status in the user_data DataFrame and save to Excel."""
+    return modify_user(user_data, userid, session_active=session_active)
 
-    if reqId is not None:
-        user_data.loc[user_data['userid'] == userid, 'reqId'] = reqId
-
-    save_user_data()
-    logger.info(f"User {userid} modified successfully.")
-
-def modify_status(userid: str, active: str = None):
-    """Modify an existing user's data in the user_data DataFrame and save to Excel."""
-    global user_data
-    if userid not in user_data['userid'].values:
-        logger.error(f"User {userid} not found.")
-        return
-
-    if active is not None:
-        user_data.loc[user_data['userid'] == userid, 'active'] = active
-
-    save_user_data()
-    logger.info(f"User {userid} modified successfully.")
-
-def delete_user(userid: str):
+def delete_user(user_data, userid: str):
     """Delete a user from the user_data DataFrame and save to Excel."""
-    global user_data
     if userid not in user_data['userid'].values:
-        logger.error(f"User {userid} not found.")
-        return
+        raise ValueError(f"User {userid} not found.")
 
+    logger.info(f"Deleting user {userid} from DataFrame.")
     user_data = user_data[user_data['userid'] != userid]
-    save_user_data()
+    logger.info(f"User {userid} deleted. Saving changes to Excel.")
+    save_user_data(user_data)
     logger.info(f"User {userid} deleted successfully.")
+    return user_data
+
+def get_user_info(user_data, userid: str):
+    """Get user information from the user_data DataFrame."""
+    userid = str(userid).strip()
+    user_data['userid'] = user_data['userid'].astype(str).str.strip()
+    user_info = user_data[user_data['userid'] == userid]
+    if not user_info.empty and user_info['active'].iloc[0]:
+        return user_info.iloc[0]
+    return None
+
+def get_user_info_1(user_data, userid: str):
+    """Get user information from the user_data DataFrame (including inactive users)."""
+    userid = str(userid).strip()
+    user_data['userid'] = user_data['userid'].astype(str).str.strip()
+    user_info = user_data[user_data['userid'] == userid]
+    if not user_info.empty:
+        logger.info(f"get_user_info_1()- Found user_info: {user_info.iloc[0]}")
+    else:
+        logger.info(f"get_user_info_1()- No matching user found for userid: '{userid}'")
+
+    if not user_info.empty:
+        return user_info.iloc[0]
+    return None

@@ -1,0 +1,20 @@
+2025-03-18 10:16:38,539 [INFO] werkzeug: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-03-18 10:16:38,541 [INFO] werkzeug: [33mPress CTRL+C to quit[0m
+2025-03-18 10:16:38,541 [INFO] werkzeug:  * Restarting with stat
+2025-03-18 10:16:40,716 [WARNING] werkzeug:  * Debugger is active!
+2025-03-18 10:16:40,722 [INFO] werkzeug:  * Debugger PIN: 208-195-166
+2025-03-18 10:18:23,710 [INFO] users: User 78632114 added successfully.
+2025-03-18 10:18:23,719 [INFO] werkzeug: 127.0.0.1 - - [18/Mar/2025 10:18:23] "POST /api/add_user HTTP/1.1" 200 -
+2025-03-18 10:19:03,356 [INFO] users: User 78632114 modified successfully.
+2025-03-18 10:19:03,357 [INFO] werkzeug: 127.0.0.1 - - [18/Mar/2025 10:19:03] "POST /api/modify_user HTTP/1.1" 200 -
+2025-03-18 10:19:18,251 [INFO] werkzeug: 127.0.0.1 - - [18/Mar/2025 10:19:18] "GET /api/users HTTP/1.1" 200 -
+2025-03-18 10:26:18,507 [ERROR] users: User 78637214 not found.
+2025-03-18 10:26:18,511 [INFO] werkzeug: 127.0.0.1 - - [18/Mar/2025 10:26:18] "POST /api/delete_user HTTP/1.1" 200 -
+2025-03-18 10:26:26,123 [ERROR] users: User 78637213 not found.
+2025-03-18 10:26:26,123 [INFO] werkzeug: 127.0.0.1 - - [18/Mar/2025 10:26:26] "POST /api/delete_user HTTP/1.1" 200 -
+2025-03-18 10:26:36,922 [ERROR] users: User 78637210 not found.
+2025-03-18 10:26:36,931 [INFO] werkzeug: 127.0.0.1 - - [18/Mar/2025 10:26:36] "POST /api/delete_user HTTP/1.1" 200 -
+2025-03-18 10:26:45,491 [ERROR] users: User 43222 not found.
+2025-03-18 10:26:45,497 [INFO] werkzeug: 127.0.0.1 - - [18/Mar/2025 10:26:45] "POST /api/delete_user HTTP/1.1" 200 -
+2025-03-18 10:27:04,756 [INFO] werkzeug: 127.0.0.1 - - [18/Mar/2025 10:27:04] "GET /api/users HTTP/1.1" 200 -

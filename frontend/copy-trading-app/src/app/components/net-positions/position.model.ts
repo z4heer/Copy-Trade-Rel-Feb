@@ -4,7 +4,10 @@ export interface Holding {
   TradingSymbol: string;
   Exchange: string;
   BuyQuantity: number;
-  BuyPrice: string;
+  BuyPrice: number;
+  TotalVal: string;
+  Ltp: string;
+  ChangePcToday: string;
   ProductCode: string;
   StreamingSymbol: string;
   }

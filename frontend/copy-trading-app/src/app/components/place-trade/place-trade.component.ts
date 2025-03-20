@@ -37,6 +37,8 @@ export class PlaceTradeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    //this.tradeForm.get('Trading_Symbol')?.disable()
+    //this.tradeForm.get('Streaming_Symbol')?.disable()
     this.tradeForm.get('symbol')?.valueChanges.subscribe(symbol => {
       if (symbol) {
         this.tradeService.getIsin(symbol).subscribe(

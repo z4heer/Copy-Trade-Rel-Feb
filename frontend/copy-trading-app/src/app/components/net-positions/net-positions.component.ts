@@ -35,10 +35,11 @@ export class NetPositionsComponent implements OnInit {
   }
   
   call_squareoff(position: Position): void {
-    //console.log('Modify order- order.Symbol:', order.Symbol);
-    const orderData = JSON.stringify(position);
-    this.router.navigate(['/square-off-position', { order: orderData }]);
+    //console.log('Sqaure off- order:', position);
+    const positionData = JSON.stringify(position);
+    this.router.navigate(['/square-off-position', { position: positionData }]);
   }
+  
   squareOff(holding: any): void {
     const positionDetails = {
       userid: holding,
@@ -60,7 +61,6 @@ export class NetPositionsComponent implements OnInit {
         }
       ]
     };
-
     this.tradeService.squareOff(positionDetails).subscribe(
       () => {
         alert('Position squared off successfully');

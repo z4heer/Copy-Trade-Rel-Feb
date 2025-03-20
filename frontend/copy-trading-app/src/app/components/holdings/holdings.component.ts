@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { TradeService } from '../../services/trade.service';
 import { CommonModule } from '@angular/common';
-import { Holding, HoldingResponse } from '../net-positions/position.model';
+import { Holding } from '../net-positions/position.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-holdings',
@@ -14,7 +15,7 @@ export class HoldingsComponent implements OnInit {
   holdings: Holding[] = [];
   error: string | null = null;
 
-  constructor(private tradeService: TradeService) {}
+  constructor(private tradeService: TradeService,private router: Router) {}
 
   ngOnInit(): void {
     this.tradeService.getHoldings_all().subscribe(
@@ -27,8 +28,9 @@ export class HoldingsComponent implements OnInit {
   }
 
   call_squareoff(holding: Holding): void {
-  
-    const holdingData = JSON.stringify(holding);
+    const positionData = JSON.stringify(holding);
+    console.log('Sqaure off- order:', positionData);  
+    this.router.navigate(['/square-off-position', { position: positionData }]);
   }
   
     squareOff(holding: any): void {
@@ -45,6 +47,7 @@ export class HoldingsComponent implements OnInit {
           ProductCode: 'CNC',
           StreamingSymbol: holding.symbol,
           Price: holding.price,
+          Ltp: holding.ltp,
           DisclosedQuantity: 0,
           GTDDate: 'NA',
           Remark: 'Closing positions',

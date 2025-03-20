@@ -34,7 +34,7 @@ def save_user_data(user_data):
 
 def add_user(user_data, userid: str, active: bool, reqId: str, username: str, apiKey: str, api_secret_password: str):
     """Add a new user to the user_data DataFrame and save to Excel."""
-    new_user = pd.DataFrame([[apiKey, api_secret_password, reqId, userid, username, bool(active), bool("FALSE")]], columns=user_data.columns)
+    new_user = pd.DataFrame([[apiKey, api_secret_password, reqId, userid, username, bool(active), False]], columns=user_data.columns)
     user_data = pd.concat([user_data, new_user], ignore_index=True)
     save_user_data(user_data)
     logger.info(f"User {userid} added successfully.")
@@ -65,8 +65,9 @@ def modify_user(user_data, userid: str, active: bool = None, reqId: str = None, 
     logger.info(f"User {userid} modified successfully.")
     return user_data
 
-def modify_status(user_data, userid: str, session_active: bool = None):
+def modify_status(user_data, userid: str, session_active: bool):
     """Modify an existing user's session status in the user_data DataFrame and save to Excel."""
+    #logger.debug(f"session_active= {session_active}")
     return modify_user(user_data, userid, session_active=session_active)
 
 def delete_user(user_data, userid: str):

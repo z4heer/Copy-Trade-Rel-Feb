@@ -5,7 +5,7 @@ from api_connect_wrapper import APIConnectWrapper
 import pandas as pd
 import logging
 from flask_cors import CORS
-
+from transform import transformed_orderbook, transformed_tradebook
 from users import add_user, modify_user, delete_user, modify_status, load_user_data, save_user_data, get_user_info, \
     get_user_info_1, load_all_user_data
 
@@ -20,9 +20,10 @@ logger = logging.getLogger(__name__)
 user_data = load_user_data()
 
 def get_active_users(user_data):
-    # Ensure 'active' column is boolean type
+    # Ensure 'active' and 'session_active' columns are boolean type
     user_data['active'] = user_data['active'].astype(bool)
-    return user_data[user_data['active']]
+    user_data['session_active'] = user_data['session_active'].astype(bool)
+    return user_data[user_data['active'] & user_data['session_active']]
 
 @app.route('/api/users', methods=['GET'])
 def get_users():
@@ -149,9 +150,12 @@ def position_square_off():
         for _, user_info in active_users.iterrows():
             if 'userid' in trade_data:
                 del trade_data['userid']
+            #logger.debug(f"before validate_and_convert_trade_data()= {trade_data}")
             trade_data = APIConnectWrapper.validate_and_convert_trade_data(trade_data)
             api_connect = APIConnectWrapper(user_info)
+            #logger.debug(f"after position_square_off()= {trade_data}")
             response = api_connect.position_square_off(trade_data)
+            #logger.debug(f"after position_square_off() -response= {response}")
             responses.append(response)
         return jsonify(responses)
     except Exception as e:
@@ -313,7 +317,10 @@ def holdings_all_users():
                         "TradingSymbol": holding.get("trdSym", ""),
                         "Exchange": holding.get("exc", "NSE"),
                         "BuyQuantity": holding.get("totalQty", 0),
-                        "BuyPrice": holding.get("totalVal", ""),
+                        "BuyPrice": 0,
+                        "TotalVal": holding.get("totalVal", ""),
+                        "Ltp": holding.get("ltp", ""),
+                        "ChangePcToday": holding.get("chgP", ""),
                         "ProductCode": "CNC" if "cncRmsHdg" in holding else "NORMAL",
                         "StreamingSymbol": holding.get("trdSym", "")
                     }
@@ -323,7 +330,7 @@ def holdings_all_users():
             else:
                 logger.error(f"Response for userid {userid} does not contain required keys")
                 return jsonify({"error": "Invalid response structure / No Data Found"}), 500
-
+        #logger.debug(f"all holdings= {all_holdings}")
         formatted_response = {
             "Holdings": all_holdings
         }
@@ -484,7 +491,7 @@ def api_add_user():
             return jsonify({"error": "User with this userid already exists"}), 400
 
         user_data = add_user(user_data, userid, active, reqId, username, apikey, apisec)
-        logger.debug("error: User added successfully")
+        logger.debug("success: User added successfully")
         return jsonify({"message": "User added successfully"}), 200
     except Exception as e:
         logger.error(f"Error in api_add_user: {e}")

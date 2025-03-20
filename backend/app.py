@@ -302,10 +302,10 @@ def holdings_all_users():
 
             if isinstance(response, str):
                 response = json.loads(response)
+                logger.debug(f"isinstance- {response}")
 
             if "eq" in response and "data" in response["eq"] and "rmsHdg" in response["eq"]["data"]:
                 holdings = response["eq"]["data"]["rmsHdg"]
-
                 mapped_holdings = [
                     {
                         "userid": userid,
@@ -475,13 +475,16 @@ def api_add_user():
         apisec = data.get('api_secret_password')
 
         if not userid or active is None or not reqId or not username:
+            logger.debug("error: Missing required fields")
             return jsonify({"error": "Missing required fields"}), 400
 
         # Check if the userid already exists
         if userid in user_data['userid'].values:
+            logger.debug("error: User with this userid already exists")
             return jsonify({"error": "User with this userid already exists"}), 400
 
         user_data = add_user(user_data, userid, active, reqId, username, apikey, apisec)
+        logger.debug("error: User added successfully")
         return jsonify({"message": "User added successfully"}), 200
     except Exception as e:
         logger.error(f"Error in api_add_user: {e}")

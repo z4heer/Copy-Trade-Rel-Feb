@@ -1,16 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
 import { HoldingResponse, NetPositionResponse } from '../components/net-positions/position.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TradeService {
-  private nseUrl = 'https://www.nseindia.com/api/quote-equity?symbol='; // NSE API for LTP
   private baseUrl = 'http://127.0.0.1:5000/api';
-  private orderData: any;
 
   constructor(private http: HttpClient) {}
 
@@ -56,14 +53,6 @@ export class TradeService {
 
   squareOff(positionDetails: any): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}/square-off-position`, positionDetails);
-  }
-
-  setOrderData(order: any) {
-    this.orderData = order;
-  }
-
-  getOrderData() {
-    return this.orderData;
   }
 
 }

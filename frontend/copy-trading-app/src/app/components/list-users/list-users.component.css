@@ -1,35 +1,55 @@
 .list-users {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh; /* Ensure the component takes the full height of the viewport */
-    padding: 20px;
-    text-align: center; /* Center-align text */
-  }
-  
-  .list-users h2 {
-    margin-bottom: 20px; /* Add spacing below the heading */
-  }
-  
-  .list-users .error {
-    color: red;
-    margin-bottom: 20px; /* Add spacing below the error message */
-  }
-  
-  .list-users table {
-    width: 100%;
-    max-width: 800px; /* Limit the maximum width of the table */
-    border-collapse: collapse;
-    margin-bottom: 20px; /* Add spacing below the table */
-  }
-  
-  .list-users th, .list-users td {
-    border: 1px solid #ddd;
-    padding: 8px;
-  }
-  
-  .list-users th {
-    background-color: #f2f2f2;
-    text-align: left;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh; /* Ensure the component takes the full height of the viewport */
+  padding: 20px;
+  text-align: center; /* Center-align text */
+}
+
+.list-users h2 {
+  margin-bottom: 20px; /* Add spacing below the heading */
+}
+
+.list-users .error {
+  color: red; /* Color the error message in red */
+  margin-bottom: 20px; /* Add spacing below the error message */
+}
+
+.list-users table {
+  width: 100%;
+  max-width: 800px; /* Limit the maximum width of the table */
+  border-collapse: collapse;
+  margin-bottom: 20px; /* Add spacing below the table */
+}
+
+.list-users th, .list-users td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.list-users th {
+  background-color: #f2f2f2;
+  text-align: left;
+}
+
+.list-users .links {
+  margin-bottom: 20px; /* Add spacing below the links */
+}
+
+.list-users form {
+  margin-bottom: 20px; /* Add spacing below each form */
+}
+
+.list-users input {
+  margin: 5px;
+}
+
+.boolean-true {
+  color: green; /* Color for true boolean value */
+}
+
+.boolean-false {
+  color: red; /* Color for false boolean value */
+}

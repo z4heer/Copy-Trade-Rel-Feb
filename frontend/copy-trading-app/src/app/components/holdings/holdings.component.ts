@@ -29,41 +29,8 @@ export class HoldingsComponent implements OnInit {
 
   call_squareoff(holding: Holding): void {
     const positionData = JSON.stringify(holding);
-    console.log('Sqaure off- order:', positionData);  
+    //console.log('Sqaure off- order:', positionData);  
     this.router.navigate(['/square-off-position', { position: positionData }]);
   }
   
-    squareOff(holding: any): void {
-    const positionDetails = {
-      userid: '45937331',
-      sqrLst: [
-        {
-          TradingSymbol: holding.symbol,
-          Exchange: 'NSE',
-          Action: 'SELL',
-          Duration: 'DAY',
-          OrderType: 'LIMIT',
-          Quantity: holding.quantity,
-          ProductCode: 'CNC',
-          StreamingSymbol: holding.symbol,
-          Price: holding.price,
-          Ltp: holding.ltp,
-          DisclosedQuantity: 0,
-          GTDDate: 'NA',
-          Remark: 'Closing positions',
-          TriggerPrice: holding.price
-        }
-      ]
-    };
-
-    this.tradeService.squareOff(positionDetails).subscribe(
-      () => {
-        alert('Position squared off successfully');
-      },
-      (error) => {
-        this.error = 'Failed to square off position';
-        console.error(error);
-      }
-    );
-  }
 }

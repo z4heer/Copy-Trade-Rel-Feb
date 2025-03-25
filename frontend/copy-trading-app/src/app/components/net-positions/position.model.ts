@@ -26,6 +26,7 @@ export interface Holding {
     ProductCode: string;
     StreamingSymbol: string;
     squareOffSts: string;
+    squareOffAction: string;
     userid: string;
     Symbol: string;
   }

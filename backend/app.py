@@ -318,6 +318,7 @@ def holdings_all_users():
                         "Exchange": holding.get("exc", "NSE"),
                         "BuyQuantity": holding.get("totalQty", 0),
                         "BuyPrice": 0,
+                        "squareOffAction": "SELL",
                         "TotalVal": holding.get("totalVal", ""),
                         "Ltp": holding.get("ltp", ""),
                         "ChangePcToday": holding.get("chgP", ""),
@@ -429,7 +430,8 @@ def net_position_all_users():
                         "SellPrice": pos.get("avgSlPrc", ""),
                         "ProductCode": pos.get("prdCode", ""),
                         "StreamingSymbol": pos.get("trdSym", ""),
-                        "squareOffSts": pos.get("sqOff", "false")
+                        "squareOffSts": pos.get("sqOff", "false"),
+                        "squareOffAction": ("Buy" if pos.get("ntByQty","0") == "0" else "Sell")
                     }
                     for pos in positions
                 ]

@@ -52,8 +52,10 @@ export class TradeService {
   }
 
   squareOff(positionDetails: any): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/position_square_off`, positionDetails);
+  }
+  squareOffallusers(positionDetails: any): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}/position_square_off_all`, positionDetails);
-    //return this.http.post<any>(`${this.baseUrl}/square-off-position`, positionDetails);
   }
 
 }

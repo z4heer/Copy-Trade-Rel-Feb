@@ -25,7 +25,7 @@ export class SquareOffPositionComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       const positionData = params['position'];
-      //console.log('Position data:', positionData);  
+      console.log('Square off:', positionData);  
       if (positionData) {
         const position = JSON.parse(positionData);
         this.addSquareOff(position);
@@ -46,7 +46,7 @@ export class SquareOffPositionComponent implements OnInit {
       symbol: [position.Symbol, Validators.required],
       TradingSymbol: [position.TradingSymbol, Validators.required],
       Exchange: [position.Exchange, Validators.required],
-      Action: ['SELL', Validators.required],
+      Action: [position.squareOffAction, Validators.required],
       Duration: ['DAY', Validators.required],
       OrderType: ['LIMIT', Validators.required],
       Quantity: [position.BuyQuantity, Validators.required],

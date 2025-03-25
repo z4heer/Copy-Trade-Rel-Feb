@@ -431,7 +431,7 @@ def net_position_all_users():
                         "ProductCode": pos.get("prdCode", ""),
                         "StreamingSymbol": pos.get("trdSym", ""),
                         "squareOffSts": pos.get("sqOff", "false"),
-                        "squareOffAction": ("Buy" if pos.get("ntByQty","0") == "0" else "Sell")
+                        "squareOffAction": ("BUY" if pos.get("ntByQty","0") == "0" else "SELL")
                     }
                     for pos in positions
                 ]

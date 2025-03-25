@@ -1,80 +1,78 @@
-<div class="place-trade">
-  
+<div class="form-container">
+  <h2>Place Trade</h2>
   <form [formGroup]="tradeForm" (ngSubmit)="placeTrade()">
-    <table class="place-trade-table">
-      <thead>
-        <tr>
-          <th colspan="4"><h2>Place Trade</h2></th>
-        </tr>
-      </thead>
-      <tbody>
-      <tr>
-        <td><label for="side">BUY/SELL</label></td>
-        <td>
-          <select id="Action" formControlName="Action">
-            <option value="BUY">BUY</option>
-            <option value="SELL">SELL</option>
-          </select>
-        </td>
-        <td><label for="Exchange">Exchange</label></td>
-        <td>
-          <select id="Exchange" formControlName="Exchange">
-            <option value="NSE">NSE</option>
-            <option value="BSE">BSE</option>
-          </select>
-        </td>
-      </tr>
-      <tr>
-        <td><label for="symbol">Symbol</label></td>
-        <td><input id="symbol" formControlName="symbol" type="text" /></td>
-        <td><label for="Order_Type">Order Type</label></td>
-        <td>
-          <select id="Order_Type" formControlName="Order_Type">
-            <option value="LIMIT">LIMIT</option>
-            <option value="MARKET">MARKET</option>
-          </select>
-        </td>
-      </tr>
-      <tr>
-        <td><label for="Quantity">Quantity</label></td>
-        <td><input id="Quantity" formControlName="Quantity" type="number" /></td>
-        <td><label for="Limit_Price">Limit Price</label></td>
-        <td><input id="Limit_Price" formControlName="Limit_Price" type="number" /></td>
-      </tr>
-      <tr>
-        <td><label for="product">Product</label></td>
-        <td>
-          <select id="ProductCode" formControlName="ProductCode">
-            <option value="CNC">CNC</option>
-            <option value="Normal">Normal</option>
-          </select>
-        </td>
-        <td><label for="validity">Validity</label></td>
-        <td>
-          <select id="Duration" formControlName="Duration">
-            <option value="DAY">DAY</option>
-            <!--<option value="IOC">IOC</option>-->
-          </select>
-        </td>
-      </tr>
-      <tr>
-        <td><label for="Trading_Symbol">Trading Symbol</label></td>
-        <td><input id="Trading_Symbol" formControlName="Trading_Symbol" type="text" /></td>
-        <td><label for="Streaming_Symbol">Streaming Symbol</label></td>
-        <td><input id="Streaming_Symbol" formControlName="Streaming_Symbol" type="text" /></td>
-      </tr>
-      <tr>
-        <td><label for="disclosedQty">Disclosed Quantity</label></td>
-        <td><input id="Disclosed_Quantity" formControlName="Disclosed_Quantity" type="number" /></td>
-      </tr>
-      <tr><td>&nbsp;</td></tr>
-      <tr>
-        <td colspan="4" style="text-align: center;">
-          <button type="submit">Place Trade</button>
-        </td>
-      </tr>
-    </tbody>
-    </table>
+    <div class="form-row">
+      <div class="form-half">
+        <label for="Action">BUY/SELL:</label>
+        <select id="Action" formControlName="Action">
+          <option value="BUY">BUY</option>
+          <option value="SELL">SELL</option>
+        </select>
+      </div>
+      <div class="form-half">
+        <label for="Exchange">Exchange:</label>
+        <select id="Exchange" formControlName="Exchange">
+          <option value="NSE">NSE</option>
+          <option value="BSE">BSE</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-half">
+        <label for="symbol">Symbol:</label>
+        <input id="symbol" formControlName="symbol" type="text" />
+      </div>
+      <div class="form-half">
+        <label for="Order_Type">Order Type:</label>
+        <select id="Order_Type" formControlName="Order_Type">
+          <option value="LIMIT">LIMIT</option>
+          <option value="MARKET">MARKET</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-half">
+        <label for="Quantity">Quantity:</label>
+        <input id="Quantity" formControlName="Quantity" type="number" />
+      </div>
+      <div class="form-half">
+        <label for="Limit_Price">Limit Price:</label>
+        <input id="Limit_Price" formControlName="Limit_Price" type="number" />
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-half">
+        <label for="ProductCode">Product:</label>
+        <select id="ProductCode" formControlName="ProductCode">
+          <option value="CNC">CNC</option>
+          <option value="Normal">Normal</option>
+        </select>
+      </div>
+      <div class="form-half">
+        <label for="Duration">Validity:</label>
+        <select id="Duration" formControlName="Duration">
+          <option value="DAY">DAY</option>
+          <!--<option value="IOC">IOC</option>-->
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-half">
+        <label for="Trading_Symbol">Trading Symbol:</label>
+        <input id="Trading_Symbol" formControlName="Trading_Symbol" type="text" />
+      </div>
+      <div class="form-half">
+        <label for="Streaming_Symbol">Streaming Symbol:</label>
+        <input id="Streaming_Symbol" formControlName="Streaming_Symbol" type="text" />
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-half">
+        <label for="Disclosed_Quantity">Disclosed Quantity:</label>
+        <input id="Disclosed_Quantity" formControlName="Disclosed_Quantity" type="number" />
+      </div>
+    </div>
+    <button type="submit" [disabled]="tradeForm.invalid">Place Trade</button>
   </form>
   <div *ngIf="error" class="error">{{ error }}</div>
 </div>

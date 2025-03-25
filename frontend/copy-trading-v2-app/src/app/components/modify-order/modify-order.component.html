@@ -1,74 +1,79 @@
-<div class="modify-order">
+<div class="form-container">
+  <h2>Modify Order</h2>
   <form [formGroup]="modifyOrderForm" (ngSubmit)="modifyOrder()">
-    <table class="place-trade-table">
-      <thead>
-        <tr>
-          <th colspan="4"><h2>Modify Order</h2></th>
-        </tr>
-      </thead>
-      <tbody>
-      <tr>
-        <td><label for="Action">Action</label></td>
-        <td>{{ modifyOrderForm.get('Action')?.value }}</td>
-        <td><label for="Exchange">Exchange</label></td>
-        <td>{{ modifyOrderForm.get('Exchange')?.value }}</td>
-      </tr>
-      <tr>
-        <td><label for="symbol">Symbol</label></td>
-        <td>{{ modifyOrderForm.get('symbol')?.value }}</td>
-        <td><label for="Order_Type">Order Type</label></td>
-        <td>
-          <select id="Order_Type" formControlName="Order_Type">
-            <option value="LIMIT">LIMIT</option>
-            <option value="MARKET">MARKET</option>
-          </select>
-        </td>
-      </tr>
-      <tr>
-        <td><label for="Quantity">Quantity</label></td>
-        <td><input id="CurrentQuantity" formControlName="CurrentQuantity" type="number" /></td>
-        <td><label for="Limit_Price">Limit Price</label></td>
-        <td>
-          <input id="Limit_Price" formControlName="Limit_Price" type="number" [hidden]="modifyOrderForm.get('Order_Type')?.value === 'MARKET'" />
-        </td>
-      </tr>
-      <tr>
-        <td><label for="ProductCode">Product</label></td>
-        <td>
-          <select id="ProductCode" formControlName="ProductCode">
-            <option value="CNC">CNC</option>
-            <option value="Normal">Normal</option>
-          </select>
-        </td>
-        <td><label for="Duration">Duration</label></td>
-        <td>{{ modifyOrderForm.get('Duration')?.value }}</td>
-      </tr>
-      <tr>
-        <td><label for="Trading_Symbol">Trading Symbol</label></td>
-        <td>{{ modifyOrderForm.get('Trading_Symbol')?.value }}</td>
-        <td><label for="Streaming_Symbol">Streaming Symbol</label></td>
-        <td>{{ modifyOrderForm.get('Streaming_Symbol')?.value }}</td>
-      </tr>
-      <tr>
-        <td><label for="Disclosed_Quantity">Disclosed Quantity</label></td>
-        <td><input id="Disclosed_Quantity" formControlName="Disclosed_Quantity" type="number" /></td>
-        <td><label for="userid">User Id</label></td>
-        <td>{{ modifyOrderForm.get('userid')?.value }}</td>
-      </tr>
-      <tr>
-        <td><label for="Quantity">Quantity</label></td>
-        <td>{{ modifyOrderForm.get('Quantity')?.value }}</td>
-        <td><label for="Quantity">Order_ID</label></td>
-        <td>{{ modifyOrderForm.get('Order_ID')?.value }}</td>
-      </tr>
-      <tr><td>&nbsp;</td></tr>
-      <tr>
-        <td colspan="4" style="text-align: center;">
-          <button type="submit">Modify Order</button>
-        </td>
-      </tr>
-    </tbody>
-    </table>
+    <div class="form-row">
+      <div class="form-half">
+        <label>Action:</label>
+        <input type="text" [value]="modifyOrderForm.get('Action')?.value" readonly />
+      </div>
+      <div class="form-half">
+        <label>Exchange:</label>
+        <input type="text" [value]="modifyOrderForm.get('Exchange')?.value" readonly />
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-half">
+        <label>Symbol:</label>
+        <input type="text" formControlName="symbol" readonly />
+      </div>
+      <div class="form-half">
+        <label>Order Type:</label>
+        <select formControlName="Order_Type">
+          <option value="LIMIT">LIMIT</option>
+          <option value="MARKET">MARKET</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-half">
+        <label>Quantity:</label>
+        <input type="number" formControlName="CurrentQuantity" />
+      </div>
+      <div class="form-half">
+        <label>Limit Price:</label>
+        <input type="number" formControlName="Limit_Price" [hidden]="modifyOrderForm.get('Order_Type')?.value === 'MARKET'" />
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-half">
+        <label>Product:</label>
+        <select formControlName="ProductCode">
+          <option value="CNC">CNC</option>
+          <option value="Normal">Normal</option>
+        </select>
+      </div>
+      <div class="form-half">
+        <label>Duration:</label>
+        <input type="text" [value]="modifyOrderForm.get('Duration')?.value" readonly />
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-half">
+        <label>Trading Symbol:</label>
+        <input type="text" [value]="modifyOrderForm.get('Trading_Symbol')?.value" readonly />
+      </div>
+      <div class="form-half">
+        <label>Streaming Symbol:</label>
+        <input type="text" [value]="modifyOrderForm.get('Streaming_Symbol')?.value" readonly />
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-half">
+        <label>Disclosed Quantity:</label>
+        <input type="number" formControlName="Disclosed_Quantity" />
+      </div>
+      <div class="form-half">
+        <label>User Id:</label>
+        <input type="text" [value]="modifyOrderForm.get('userid')?.value" readonly />
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-half">
+        <label>Order ID:</label>
+        <input type="text" [value]="modifyOrderForm.get('Order_ID')?.value" readonly />
+      </div>
+    </div>
+    <button type="submit" [disabled]="modifyOrderForm.invalid">Modify Order</button>
   </form>
   <div *ngIf="error" class="error">{{ error }}</div>
 </div>

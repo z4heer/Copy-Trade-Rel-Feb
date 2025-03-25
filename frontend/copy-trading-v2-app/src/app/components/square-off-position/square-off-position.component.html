@@ -1,73 +1,87 @@
-<div class="square-off-position">
+<div class="form-container">
   <h2>Position Square Off</h2>
   <form [formGroup]="squareOffForm" (ngSubmit)="squareOff()">
     <div formArrayName="sqrLst">
       <div *ngFor="let sqr of sqrLst.controls; let i = index" [formGroupName]="i">
-        <div>
-          <label for="userid">User ID</label>
-          <input id="userid" formControlName="userid" type="text" readonly />
+        <div class="form-row">
+          <div class="form-half">
+            <label for="userid">User ID:</label>
+            <input id="userid" formControlName="userid" type="text" readonly />
+          </div>
+          <div class="form-half">
+            <label for="symbol">Symbol:</label>
+            <input id="symbol" formControlName="symbol" type="text" readonly />
+          </div>
         </div>
-        <div>
-          <label for="symbol">Symbol</label>
-          <input id="symbol" formControlName="symbol" type="text" readonly />
+        <div class="form-row">
+          <div class="form-half">
+            <label for="TradingSymbol">Trading Symbol:</label>
+            <input id="TradingSymbol" formControlName="TradingSymbol" type="text" readonly />
+          </div>
+          <div class="form-half">
+            <label for="Exchange">Exchange:</label>
+            <input id="Exchange" formControlName="Exchange" type="text" readonly />
+          </div>
         </div>
-        <div>
-          <label for="TradingSymbol">Trading Symbol</label>
-          <input id="TradingSymbol" formControlName="TradingSymbol" type="text" readonly />
+        <div class="form-row">
+          <div class="form-half">
+            <label for="Action">Action:</label>
+            <input id="Action" formControlName="Action" type="text" readonly />
+          </div>
+          <div class="form-half">
+            <label for="Duration">Duration:</label>
+            <input id="Duration" formControlName="Duration" type="text" readonly />
+          </div>
         </div>
-        <div>
-          <label for="Exchange">Exchange</label>
-          <input id="Exchange" formControlName="Exchange" type="text" readonly />
+        <div class="form-row">
+          <div class="form-half">
+            <label for="OrderType">Order Type:</label>
+            <input id="OrderType" formControlName="OrderType" type="text" readonly />
+          </div>
+          <div class="form-half">
+            <label for="Quantity">Quantity:</label>
+            <input id="Quantity" formControlName="Quantity" type="number" readonly />
+          </div>
         </div>
-        <div>
-          <label for="Action">Action</label>
-          <input id="Action" formControlName="Action" type="text" readonly />
+        <div class="form-row">
+          <div class="form-half">
+            <label for="ProductCode">Product Code:</label>
+            <input id="ProductCode" formControlName="ProductCode" type="text" readonly />
+          </div>
+          <div class="form-half">
+            <label for="StreamingSymbol">Streaming Symbol:</label>
+            <input id="StreamingSymbol" formControlName="StreamingSymbol" type="text" readonly />
+          </div>
         </div>
-        <div>
-          <label for="Duration">Duration</label>
-          <input id="Duration" formControlName="Duration" type="text" readonly />
+        <div class="form-row">
+          <div class="form-half">
+            <label for="Price">Price:</label>
+            <input id="Price" formControlName="Price" type="number" readonly />
+          </div>
+          <div class="form-half">
+            <label for="DisclosedQuantity">Disclosed Quantity:</label>
+            <input id="DisclosedQuantity" formControlName="DisclosedQuantity" type="number" />
+          </div>
         </div>
-        <div>
-          <label for="OrderType">Order Type</label>
-          <input id="OrderType" formControlName="OrderType" type="text" readonly />
+        <div class="form-row">
+          <div class="form-half">
+            <label for="GTDDate">GTD Date:</label>
+            <input id="GTDDate" formControlName="GTDDate" type="text" />
+          </div>
+          <div class="form-half">
+            <label for="Remark">Remark:</label>
+            <input id="Remark" formControlName="Remark" type="text" />
+          </div>
         </div>
-        <div>
-          <label for="Quantity">Quantity</label>
-          <input id="Quantity" formControlName="Quantity" type="number" readonly />
-        </div>
-        <div>
-          <label for="ProductCode">Product Code</label>
-          <input id="ProductCode" formControlName="ProductCode" type="text" readonly />
-        </div>
-        <div>
-          <label for="StreamingSymbol">Streaming Symbol</label>
-          <input id="StreamingSymbol" formControlName="StreamingSymbol" type="text" readonly />
-        </div>
-        <div>
-          <label for="Price">Price</label>
-          <input id="Price" formControlName="Price" type="number" readonly />
-        </div>
-        <div>
-          <label for="DisclosedQuantity">Disclosed Quantity</label>
-          <input id="DisclosedQuantity" formControlName="DisclosedQuantity" type="number" />
-        </div>
-        <div>
-          <label for="GTDDate">GTD Date</label>
-          <input id="GTDDate" formControlName="GTDDate" type="text" />
-        </div>
-        <div>
-          <label for="Remark">Remark</label>
-          <input id="Remark" formControlName="Remark" type="text" />
-        </div>
-        <div>
-          <label for="TriggerPrice">Trigger Price</label>
-          <input id="TriggerPrice" formControlName="TriggerPrice" type="number" />
+        <div class="form-row">
+          <div class="form-half">
+            <label for="TriggerPrice">Trigger Price:</label>
+            <input id="TriggerPrice" formControlName="TriggerPrice" type="number" />
+          </div>
         </div>
       </div>
     </div>
-    <div>
-      <button type="submit">Square Off Position</button>
-    </div>
+    <button type="submit" [disabled]="squareOffForm.invalid">Square Off Position</button>
   </form>
   <div *ngIf="error" class="error">{{ error }}</div>
 </div>

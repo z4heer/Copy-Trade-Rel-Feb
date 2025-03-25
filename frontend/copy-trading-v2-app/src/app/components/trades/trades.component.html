@@ -1,0 +1,27 @@
+<div class="trades">
+  <div *ngIf="error" class="error">{{ error }}</div>
+ <!-- <div *ngIf="orders.length == 0">No Data found! Please check if active and session active users are available</div>-->
+  <table *ngIf="orders.length">
+    <thead>
+      <tr><th colspan="7"><h2>Trades</h2></th></tr>
+      <tr>
+      <th>Order ID</th>
+      <th>Symbol</th>
+      <th>Quantity</th>
+      <th>Price</th>
+      <th>Status</th>
+      <th>User ID</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let order of orders">
+      <td>{{ order.Order_ID }}</td>
+      <td>{{ order.Symbol }}</td>
+      <td>{{ order.Quantity }}</td>
+      <td>{{ order.Limit_Price }}</td>
+      <td>{{ order.status }}</td>
+      <td>{{ order.userid }}</td>
+    </tr>
+  </tbody>
+  </table>
+</div>

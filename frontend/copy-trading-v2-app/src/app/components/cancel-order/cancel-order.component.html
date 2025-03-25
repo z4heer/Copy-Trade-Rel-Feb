@@ -1,0 +1,50 @@
+<div class="cancel-order">
+    <h2>Cancel Order</h2>
+    <form [formGroup]="cancelOrderForm" (ngSubmit)="cancelOrder()">
+      <div>
+        <label for="Trading_Symbol">Trading Symbol</label>
+        <input id="Trading_Symbol" formControlName="Trading_Symbol" type="text" />
+      </div>
+      <div>
+        <label for="Exchange">Exchange</label>
+        <select id="Exchange" formControlName="Exchange">
+          <option value="NSE">NSE</option>
+          <option value="BSE">BSE</option>
+        </select>
+      </div>
+      <div>
+        <label for="Action">BUY/SELL</label>
+        <select id="Action" formControlName="Action">
+          <option value="BUY">BUY</option>
+          <option value="SELL">SELL</option>
+        </select>
+      </div>
+      <div>
+        <label for="Order_Type">Order Type</label>
+        <select id="Order_Type" formControlName="Order_Type">
+          <option value="LIMIT">LIMIT</option>
+          <option value="MARKET">MARKET</option>
+        </select>
+      </div>
+      <div>
+        <label for="CurrentQuantity">Current Quantity</label>
+        <input id="CurrentQuantity" formControlName="CurrentQuantity" type="number" />
+      </div>
+      <div>
+        <label for="Streaming_Symbol">Streaming Symbol</label>
+        <input id="Streaming_Symbol" formControlName="Streaming_Symbol" type="text" />
+      </div>
+      <div>
+        <label for="Order_ID">Order ID</label>
+        <input id="Order_ID" formControlName="Order_ID" type="text" />
+      </div>
+      <div>
+        <label for="Product_Code">Product Code</label>
+        <input id="Product_Code" formControlName="Product_Code" type="text" />
+      </div>
+      <div>
+        <button type="submit">Cancel Order</button>
+      </div>
+    </form>
+    <div *ngIf="error" class="error">{{ error }}</div>
+  </div>

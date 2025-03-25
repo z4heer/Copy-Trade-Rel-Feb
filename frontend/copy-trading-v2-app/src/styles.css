@@ -1,0 +1,179 @@
+/* ============================
+  Global Styles
+============================ */
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+  }
+  
+  /* Main container */
+  .app-container {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    height: 100vh;
+  }
+  
+  /* Content area */
+  .content {
+    padding: 20px;
+  }
+  
+  /* ============================
+    Header Styles
+  ============================ */
+  header {
+    background-color: #007bff;
+    color: white;
+    padding: 15px 20px;
+    text-align: center;
+    font-size: 1.5rem;
+  }
+  
+  /* ============================
+    Navigation Styles
+  ============================ */
+  nav {
+    background-color: #343a40;
+    color: white;
+    width: 200px;
+    padding-top: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    gap: 10px;
+  }
+  
+  nav a {
+    color: white;
+    padding: 12px 20px;
+    text-decoration: none;
+    display: block;
+    font-size: 14px;
+  }
+  
+  nav a:hover {
+    background-color: #495057;
+  }
+  
+  nav a.active {
+    background-color: #007bff;
+    font-weight: bold;
+  }
+  
+  /* ============================
+    Table Styles
+  ============================ */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  th {
+    background-color: #f1f1f1;
+    font-weight: bold;
+  }
+  
+  /* Alternate row color */
+  tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  /* Hover effect */
+  tr:hover {
+    background-color: #e9ecef;
+    cursor: pointer;
+  }
+  
+  /* ============================
+    Form Styles
+  ============================ */
+  form {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    max-width: 600px;
+    margin: auto;
+  }
+  
+  /* Form Grid Layout */
+  .form-group {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+  }
+  
+  .form-group label {
+    width: 30%;
+    font-weight: bold;
+  }
+  
+  .form-group input, 
+  .form-group select {
+    width: 65%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  /* Button Styles */
+  button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 10px;
+  }
+  
+  button:hover {
+    background-color: #218838;
+  }
+  
+  /* Cancel Button */
+  button.cancel {
+    background-color: #dc3545;
+  }
+  
+  button.cancel:hover {
+    background-color: #c82333;
+  }
+  
+  /* ============================
+    Responsive Design
+  ============================ */
+  @media (max-width: 768px) {
+    .app-container {
+      grid-template-rows: auto 1fr;
+      grid-template-columns: 1fr;
+    }
+  
+    nav {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+    }
+  
+    .form-group {
+      flex-direction: column;
+    }
+  
+    .form-group label,
+    .form-group input,
+    .form-group select {
+      width: 100%;
+    }
+  }/* You can add global styles to this file, and also import other style files */

@@ -1,0 +1,14 @@
+.user-manual {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .user-manual h1 {
+    color: #2c3e50;
+  }
+  
+  .user-manual pre {
+    background-color: #f4f4f4;
+    padding: 10px;
+    border-radius: 5px;
+  }

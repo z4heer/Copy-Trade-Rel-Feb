@@ -1,0 +1,40 @@
+<div class="holdings">
+  <div *ngIf="error" class="error">{{ error }}</div>
+ <!-- <div *ngIf="holdings.length == 0">No Data found! Please check if active and session active users are available</div> -->
+  <table *ngIf="holdings.length > 0">
+    <thead>
+      <tr><th colspan="10"><h2>Holdings</h2></th></tr>
+
+      <tr>
+        <th>Symbol</th>
+        <!--<th>Trading Symbol</th> -->
+        <th>Exchange</th>
+        <th>Quantity</th>
+        <th>LTP</th>
+        <th>Total Value</th>
+        <th>Change % Today</th>
+        <th>Product Code</th>
+        <th>Streaming Symbol</th>
+        <th>User ID</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let holding of holdings">
+        <td>{{ holding.Symbol }}</td>
+       <!-- <td>{{ holding.TradingSymbol }}</td> -->
+        <td>{{ holding.Exchange }}</td>
+        <td>{{ holding.BuyQuantity }}</td>
+        <td>{{ holding.Ltp }}</td>
+        <td>{{ holding.TotalVal }}</td>
+        <td>{{ holding.ChangePcToday }}</td>
+        <td>{{ holding.ProductCode }}</td>
+        <td>{{ holding.StreamingSymbol }}</td>
+        <td>{{ holding.userid }}</td>
+        <td>
+          <button (click)="call_squareoff(holding)">Square Off</button>
+      </tr>
+    </tbody>
+  </table>
+
+</div>

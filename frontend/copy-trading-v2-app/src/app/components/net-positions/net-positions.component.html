@@ -1,0 +1,42 @@
+<div class="netpositions">
+  
+  <div *ngIf="error" class="error">{{ error }}</div>
+ <!-- <div *ngIf="positions.length == 0">No Data found! Please check if active and session active users are available</div> -->
+  <table *ngIf="positions.length">
+    <thead>
+      <tr><th colspan="12"><h2>Net Positions</h2></th></tr>
+      <tr>
+        <th>User ID</th>
+        <th>Symbol</th>
+        <th>Trading Symbol</th>
+        <th>Exchange</th>
+        <th>Buy Quantity</th>
+        <th>Buy Price</th>
+        <th>Sell Quantity</th>
+        <th>Sell Price</th>
+        <th>Product Code</th>
+        <th>Streaming Symbol</th>
+        <th>Square off Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let position of positions">
+        <td>{{ position.userid }}</td>
+        <td>{{ position.Symbol }}</td>
+        <td>{{ position.TradingSymbol }}</td>
+        <td>{{ position.Exchange }}</td>
+        <td>{{ position.BuyQuantity }}</td>
+        <td>{{ position.BuyPrice }}</td>
+        <td>{{ position.SellQuantity }}</td>
+        <td>{{ position.SellPrice }}</td>
+        <td>{{ position.ProductCode }}</td>
+        <td>{{ position.StreamingSymbol }}</td>
+        <td>{{ position.squareOffSts }}</td>
+        <td>
+          <button *ngIf="position.squareOffSts === 'true'" (click)="call_squareoff(position)">Position Square Off</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

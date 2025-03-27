@@ -1,75 +1,112 @@
-<div class="list-users content">
+<div class="form-container">
   <div *ngIf="error" class="error">{{ error }}</div>
-  <div> <a href="#" (click)="showForm($event, 'add')">Add User</a> </div>  
-  <table *ngIf="users.length">
-    <thead>
-      <tr>
-        <th colspan="8"><h2>List Users</h2></th>
-      </tr>
-      <tr>
-        <th>User ID</th>
-        <th>Username</th>
-        <th>Active User?</th>
-        <th>Request ID</th>
-        <th>Session Active?</th>
-        <th colspan="3">Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let user of users">
-        <td>{{ user.userid }}</td>
-        <td>{{ user.username }}</td>
-        <td [ngClass]="{'boolean-true': user.active, 'boolean-false': !user.active}">{{ user.active }}</td>
-        <td>{{ user.reqId }}</td>
-        <td [ngClass]="{'boolean-true': user.session_active, 'boolean-false': !user.session_active}">{{user.session_active}}</td>
-        <td><a href="#" (click)="showForm($event, 'modify', user)">Modify</a></td>
-        <td><a href="#" (click)="showForm($event, 'delete', user)">Delete</a></td>
-        <td><a href="#" (click)="showForm($event, 'validate', user)">Validate User</a></td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="form-row">
+    <button (click)="showForm($event, 'add')">Add User</button>
+  </div>
+  <div class="table-container">
+    <table *ngIf="users.length">
+      <thead>
+        <tr>
+          <th>User ID</th>
+          <th>Username</th>
+          <th>Active User?</th>
+          <th>Request ID</th>
+          <th>Session Active?</th>
+          <th colspan="3">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td>{{ user.userid }}</td>
+          <td>{{ user.username }}</td>
+          <td [ngClass]="{'boolean-true': user.active, 'boolean-false': !user.active}">{{ user.active }}</td>
+          <td>{{ user.reqId }}</td>
+          <td [ngClass]="{'boolean-true': user.session_active, 'boolean-false': !user.session_active}">{{user.session_active}}</td>
+          <td><button (click)="showForm($event, 'modify', user)">Modify</button></td>
+          <td><button (click)="showForm($event, 'delete', user)">Delete</button></td>
+          <td><button (click)="showForm($event, 'validate', user)">Validate User</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
   <form *ngIf="currentForm === 'add'" [formGroup]="addUserForm" (ngSubmit)="addUser()">
     <h2>Add User</h2>
-    <input formControlName="userid" placeholder="User ID" required />
-    <input formControlName="username" placeholder="Username" required />
-    <input formControlName="reqId" placeholder="Request ID" required />
-    <input formControlName="apiKey" placeholder="API Key" required />
-    <input formControlName="api_secret_password" placeholder="API Secret Password" required />
-    <label>
-      Active:
-      <input type="checkbox" formControlName="active" />
-    </label>
-    <button type="submit">Add User</button>
-    <button type="button" (click)="hideForm()">Cancel</button>
+    <div class="form-row">
+      <input formControlName="userid" placeholder="User ID" required />
+    </div>
+    <div class="form-row">
+      <input formControlName="username" placeholder="Username" required />
+    </div>
+    <div class="form-row">
+      <input formControlName="reqId" placeholder="Request ID" required />
+    </div>
+    <div class="form-row">
+      <input formControlName="apiKey" placeholder="API Key" required />
+    </div>
+    <div class="form-row">
+      <input formControlName="api_secret_password" placeholder="API Secret Password" required />
+    </div>
+    <div class="form-row">
+      <label>
+        Active:
+        <input type="checkbox" formControlName="active" />
+      </label>
+    </div>
+    <div class="form-row">
+      <button type="submit">Add User</button>
+      <button type="button" (click)="hideForm()">Cancel</button>
+    </div>
   </form>
 
   <form *ngIf="currentForm === 'modify'" [formGroup]="modifyUserForm" (ngSubmit)="modifyUser()">
     <h2>Modify User</h2>
-    <input formControlName="userid" placeholder="User ID" required />
-    <input formControlName="username" placeholder="Username" />
-    <input formControlName="reqId" placeholder="Request ID" />
-    <input formControlName="apiKey" placeholder="API Key" />
-    <input formControlName="api_secret_password" placeholder="API Secret Password" />
-    <label>
-      Active:
-      <input type="checkbox" formControlName="active" />
-    </label>
-    <button type="submit">Modify User</button>
-    <button type="button" (click)="hideForm()">Cancel</button>
+    <div class="form-row">
+      <input formControlName="userid" placeholder="User ID" required />
+    </div>
+    <div class="form-row">
+      <input formControlName="username" placeholder="Username" />
+    </div>
+    <div class="form-row">
+      <input formControlName="reqId" placeholder="Request ID" />
+    </div>
+    <div class="form-row">
+      <input formControlName="apiKey" placeholder="API Key" />
+    </div>
+    <div class="form-row">
+      <input formControlName="api_secret_password" placeholder="API Secret Password" />
+    </div>
+    <div class="form-row">
+      <label>
+        Active:
+        <input type="checkbox" formControlName="active" />
+      </label>
+    </div>
+    <div class="form-row">
+      <button type="submit">Modify User</button>
+      <button type="button" (click)="hideForm()">Cancel</button>
+    </div>
   </form>
 
   <form *ngIf="currentForm === 'delete'" [formGroup]="deleteUserForm" (ngSubmit)="deleteUser()">
     <h2>Delete User</h2>
-    <input formControlName="userid" placeholder="User ID" required />
-    <button type="submit">Delete User</button>
-    <button type="button" (click)="hideForm()">Cancel</button>
+    <div class="form-row">
+      <input formControlName="userid" placeholder="User ID" required />
+    </div>
+    <div class="form-row">
+      <button type="submit">Delete User</button>
+      <button type="button" (click)="hideForm()">Cancel</button>
+    </div>
   </form>
 
   <form *ngIf="currentForm === 'validate'" [formGroup]="validateUserForm" (ngSubmit)="validateUser()">
     <h2>Validate User</h2>
-    <input formControlName="userid" placeholder="User ID" required />
-    <button type="submit">Validate User</button>
-    <button type="button" (click)="hideForm()">Cancel</button>
+    <div class="form-row">
+      <input formControlName="userid" placeholder="User ID" required />
+    </div>
+    <div class="form-row">
+      <button type="submit">Validate User</button>
+      <button type="button" (click)="hideForm()">Cancel</button>
+    </div>
   </form>
 </div>

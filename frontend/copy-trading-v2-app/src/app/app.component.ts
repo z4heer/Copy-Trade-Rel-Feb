@@ -16,4 +16,6 @@ import { ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule
   ]
 })
-export class AppComponent {}
+export class AppComponent {
+  title = 'Copy Trading App';
+}

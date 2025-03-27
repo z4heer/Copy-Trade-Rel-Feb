@@ -1,32 +1,35 @@
 <div class="orders content">
-    <div *ngIf="error" class="error">{{ error }}</div>
-    <table *ngIf="orders.length">
-      <thead title="Orders">
-        <tr>
-          <th>Order ID</th>
-          <th>Symbol</th>
-          <th>Quantity</th>
-          <th>Price</th>
-          <th>Status</th>
-          <th>User ID</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let order of orders">
-          <td>{{ order.Order_ID }}</td>
-          <td>{{ order.Symbol }}</td>
-          <td>{{ order.Quantity }}</td>
-          <td>{{ order.Limit_Price }}</td>
-          <td>{{ order.status }}</td>
-          <td>{{ order.userid }}</td>
-          <!--rejected-->
-          <!--<td *ngIf="order.status === 'rejected'"> -->
-          <td *ngIf="order.status === 'open'">
-              <button (click)="modifyOrder(order)">Modify Order</button>
-            <button (click)="cancelOrder(order)">Cancel Order</button>
-          </td>		
-            </tr>
-      </tbody>
-    </table>
+  <div *ngIf="error" class="error">{{ error }}</div>
+  <div *ngIf="loading" class="loading">Loading...</div>  
+  <div class="filter-sort">
+    <input type="text" placeholder="Filter by Symbol" [(ngModel)]="filterSymbol" (ngModelChange)="filterOrders()" />
+  </div>
+  
+  <table *ngIf="filteredOrders.length">
+    <thead title="Orders">
+      <tr>
+        <th (click)="sortOrders('Order_ID')" [class.sorted-asc]="sortField === 'Order_ID' && sortOrder === 'asc'" [class.sorted-desc]="sortField === 'Order_ID' && sortOrder === 'desc'">Order ID</th>
+        <th (click)="sortOrders('Symbol')" [class.sorted-asc]="sortField === 'Symbol' && sortOrder === 'asc'" [class.sorted-desc]="sortField === 'Symbol' && sortOrder === 'desc'">Symbol</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th (click)="sortOrders('status')" [class.sorted-asc]="sortField === 'status' && sortOrder === 'asc'" [class.sorted-desc]="sortField === 'status' && sortOrder === 'desc'">Status</th>
+        <th (click)="sortOrders('userid')" [class.sorted-asc]="sortField === 'userid' && sortOrder === 'asc'" [class.sorted-desc]="sortField === 'userid' && sortOrder === 'desc'">User ID</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let order of filteredOrders">
+        <td>{{ order.Order_ID }}</td>
+        <td>{{ order.Symbol }}</td>
+        <td>{{ order.Quantity }}</td>
+        <td>{{ order.Limit_Price }}</td>
+        <td>{{ order.status }}</td>
+        <td>{{ order.userid }}</td>
+        <td *ngIf="order.status === 'open'">
+          <button (click)="modifyOrder(order)">Modify Order</button>
+          <button (click)="cancelOrder(order)">Cancel Order</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>

@@ -40,7 +40,7 @@
           </div>
           <div class="form-half">
             <label for="Quantity">Quantity:</label>
-            <input id="Quantity" formControlName="Quantity" type="number" readonly />
+            <input id="Quantity" formControlName="Quantity" type="number" />
           </div>
         </div>
         <div class="form-row">
@@ -56,7 +56,7 @@
         <div class="form-row">
           <div class="form-half">
             <label for="Price">Price:</label>
-            <input id="Price" formControlName="Price" type="number" readonly />
+            <input id="Price" formControlName="Price" type="number" />
           </div>
           <div class="form-half">
             <label for="DisclosedQuantity">Disclosed Quantity:</label>
@@ -81,7 +81,10 @@
         </div>
       </div>
     </div>
-    <button type="submit" [disabled]="squareOffForm.invalid">Square Off Position</button>
+    <div class="form-row">
+      <button type="submit" [disabled]="squareOffForm.invalid || loading">Square Off Position</button>
+      <div *ngIf="loading" class="loading">Loading...</div>
+    </div>
   </form>
   <div *ngIf="error" class="error">{{ error }}</div>
 </div>

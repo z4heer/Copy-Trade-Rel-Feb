@@ -93,7 +93,6 @@ def modify_trade(userID):
             return jsonify({"error": "User not found or not active"}), 404
 
         trade_data = request.json
-        logger.info(f"trade_data= {trade_data}")
         if not trade_data:
             raise ValueError("Missing trade data")
         if 'userid' in trade_data:
@@ -102,9 +101,9 @@ def modify_trade(userID):
             del trade_data['symbol']
 
         trade_data = APIConnectWrapper.validate_and_convert_trade_data(trade_data)
-
         api_connect = APIConnectWrapper(user_info)
         response = api_connect.modify_trade(userID, trade_data)
+        #logger.info(f"after modify_trade - trade_data= {trade_data}")
         return jsonify(response)
     except Exception as e:
         logger.error(f"Error in modify_trade: {e}")

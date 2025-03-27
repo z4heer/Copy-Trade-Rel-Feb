@@ -15,7 +15,7 @@ export class PlaceTradeComponent implements OnInit {
   tradeForm: FormGroup;
   currentLtp: number | null = null;
   error: string | null = null;
-
+  loading: boolean = false;
   constructor(
     private fb: FormBuilder,
     private tradeService: TradeService,
@@ -65,20 +65,23 @@ export class PlaceTradeComponent implements OnInit {
   }
 
   placeTrade(): void {
+    this.loading = true;
     if (this.tradeForm.invalid) {
       this.error = 'Trade form is invalid';
       return;
     }
-    console.log(this.tradeForm.value);
+    //console.log(this.tradeForm.value);
     const tradeDetails = this.tradeForm.value;
     this.tradeService.placeTrade(tradeDetails).subscribe(
       () => {
         this.error = null;
         alert('Trade placed successfully');
+        this.loading = false;
         this.router.navigate(['/orders']);
 
       },
       (error) => {
+        this.loading=false;
         this.error = 'Failed to place trade, please make sure RequestId is fresh session and try again';
         console.error(error);
       }

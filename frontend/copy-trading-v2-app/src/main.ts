@@ -17,7 +17,7 @@ import { SquareOffPositionComponent } from './app/components/square-off-position
 import { UserManualComponent } from './app/components/user-manual/user-manual.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+  { path: '', redirectTo: '/list-users', pathMatch: 'full' },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'list-users', component: ListUsersComponent },
   { path: 'place-trade', component: PlaceTradeComponent },

@@ -72,7 +72,10 @@
         <input id="Disclosed_Quantity" formControlName="Disclosed_Quantity" type="number" />
       </div>
     </div>
-    <button type="submit" [disabled]="tradeForm.invalid">Place Trade</button>
+    <div class="form-row">
+      <button type="submit" [disabled]="tradeForm.invalid || loading">Place Trade</button>
+      <div *ngIf="loading" class="loading">Loading...</div>
+    </div>
   </form>
   <div *ngIf="error" class="error">{{ error }}</div>
 </div>

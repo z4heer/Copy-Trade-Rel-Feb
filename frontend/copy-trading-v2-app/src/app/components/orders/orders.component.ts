@@ -2,30 +2,35 @@ import { Component, OnInit } from '@angular/core';
 import { TradeService } from '../../services/trade.service';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-orders',
   templateUrl: './orders.component.html',
   standalone: true,
   providers: [TradeService],
-  imports: [CommonModule]
+  imports: [CommonModule, FormsModule]
 })
 
 export class OrdersComponent implements OnInit {
   orders: any[] = [];
+  filteredOrders: any[] = [];
   error: string | null = null;
+  loading: boolean = false;
+  filterSymbol: string = '';
+  sortField: string = '';
+  sortOrder: string = 'asc';
 
   constructor(private tradeService: TradeService, private router: Router) {}
 
   ngOnInit(): void {
+	this.loading = true;
     this.tradeService.getOrders().subscribe(
       (data) => {
         if (typeof data === 'string') {
           try {
-            console.log("typeof data === string");
-            //console.log("data= " + data); 
-            this.orders = JSON.parse(data).orders;
-
+            this.loading = false;
+			      this.orders = JSON.parse(data).orders;
           } catch (e) {
             console.error('Failed to parse JSON data:', e);
             this.error = 'Failed to load orders';
@@ -34,7 +39,8 @@ export class OrdersComponent implements OnInit {
         } else {
           this.orders = data;
         }
-        console.log("data.length= " + this.orders.length);
+		this.loading = false;
+        this.filteredOrders = [...this.orders];
       },
       (error) => {
         this.error = 'Failed to load orders, please make sure RequestId is fresh session and try again';
@@ -43,17 +49,41 @@ export class OrdersComponent implements OnInit {
     );
   }
 
-  modifyOrder1(order: any): void {
-    console.log('Modify order:', order);
-    this.router.navigate(['/modify-order'], { state: { order } });
+  filterOrders(): void {
+    this.filteredOrders = this.orders.filter(order =>
+      order.Symbol.toLowerCase().includes(this.filterSymbol.toLowerCase())
+    );
   }
+
+  sortOrders(field: string): void {
+    if (this.sortField === field) {
+      this.sortOrder = this.sortOrder === 'asc' ? 'desc' : 'asc';
+    } else {
+      this.sortField = field;
+      this.sortOrder = 'asc';
+    }
+
+    this.filteredOrders.sort((a, b) => {
+      const valueA = a[field];
+      const valueB = b[field];
+
+      if (valueA < valueB) {
+        return this.sortOrder === 'asc' ? -1 : 1;
+      } else if (valueA > valueB) {
+        return this.sortOrder === 'asc' ? 1 : -1;
+      } else {
+        return 0;
+      }
+    });
+  }
+
   modifyOrder(order: any): void {
-    //console.log('Modify order- order.Symbol:', order.Symbol);
     const orderData = JSON.stringify(order);
     this.router.navigate(['/modify-order', { order: orderData }]);
   }
 
   cancelOrder(order: any): void {
+	this.loading = true;
     const orderDetails = {
       userid: order.userid,
       Trading_Symbol: order.Trading_Symbol,
@@ -70,6 +100,7 @@ export class OrdersComponent implements OnInit {
     if (confirmation) {
       this.tradeService.cancelOrder(orderDetails).subscribe({
         next: (response) => {
+		  this.loading = false;
           console.log('Order Cancelled successfully:', response);
         },
         error: (error) => {
@@ -79,6 +110,6 @@ export class OrdersComponent implements OnInit {
     } else {
       console.log('Order cancellation aborted.');
     }
-  }
-
+	this.loading = false;
+   }
 }

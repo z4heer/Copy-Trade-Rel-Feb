@@ -1,18 +1,23 @@
-<div class="user-manual">
-    <h1>Trading Application User Manual</h1>
-  
-    <h2>User Setup</h2>
-  
+<div class="form-container">
+  <h2>User Setup</h2>
+
+  <div class="form-row">
     <h3>1. Create My App at NuvamaWealth API-Connect</h3>
     <p>Set up your account at NuvamaWealth by using their API-Connect platform.</p>
-  
+  </div>
+
+  <div class="form-row">
     <h3>2. TOTP Setup</h3>
     <p>Configure Time-based One-Time Password (TOTP) for enhanced security.</p>
-  
+  </div>
+
+  <div class="form-row">
     <h3>3. Generate Request ID / Session ID</h3>
     <p>Generate a unique Request ID or Session ID for API interactions.</p>
-    <p>Redirect the user to the login url - https://www.nuvamawealth.com/api-connect/login?api_key=04FCaiaW37pOKA </p>
-  
+    <p>Redirect the user to the login url - <a href="https://www.nuvamawealth.com/api-connect/login?api_key=04FCaiaW37pOKA">https://www.nuvamawealth.com/api-connect/login?api_key=04FCaiaW37pOKA</a></p>
+  </div>
+
+  <div class="form-row">
     <h3>4. Configure <code>users.xlsx</code> File</h3>
     <p>Create and configure an Excel file named <code>users.xlsx</code> with the following columns:</p>
     <ul>
@@ -21,16 +26,22 @@
       <li><code>api_secret_password</code>: API Secret Password</li>
       <li><code>reqId</code>: Request ID</li>
     </ul>
-  
+  </div>
+
+  <div class="form-row">
     <h3>5. Trading Operation Pre-requisite</h3>
     <p>Ensure all users in <code>users.xlsx</code> are configured with the required parameters and an active Request ID.</p>
-  
-    <h2>Activities</h2>
-  
+  </div>
+
+  <h2>Activities</h2>
+
+  <div class="form-row">
     <h3>1. List Users</h3>
     <p><strong>Purpose:</strong> Display a list of active users with a fresh Request ID.</p>
     <p><strong>Usage:</strong> Use this feature to verify active users before placing orders.</p>
-  
+  </div>
+
+  <div class="form-row">
     <h3>2. Buy Order</h3>
     <p><strong>Purpose:</strong> Place a buy order for all active users at once.</p>
     <p><strong>Procedure:</strong></p>
@@ -38,45 +49,58 @@
       <li>Initiate the buy order process for all active users.</li>
       <li>After completion, you will be redirected to the "List Orders" section.</li>
     </ol>
-  
+  </div>
+
+  <div class="form-row">
     <h3>3. List Orders</h3>
     <p><strong>Purpose:</strong> Display a list of existing orders.</p>
     <p><strong>Features:</strong></p>
     <ul>
       <li>Links to modify or cancel orders.</li>
     </ul>
-  
+  </div>
+
+  <div class="form-row">
     <h3>4. List Net Positions</h3>
     <p><strong>Purpose:</strong> Display a list of net positions.</p>
     <p><strong>Features:</strong></p>
     <ul>
       <li>Links to sell orders.</li>
     </ul>
-  
+  </div>
+
+  <div class="form-row">
     <h3>5. List Holdings</h3>
     <p><strong>Purpose:</strong> Display a list of holdings.</p>
     <p><strong>Features:</strong></p>
     <ul>
       <li>Links to sell orders.</li>
     </ul>
-  
+  </div>
+
+  <div class="form-row">
     <h3>6. Modify Order</h3>
     <p><strong>Purpose:</strong> Modify a single order.</p>
     <p><strong>Procedure:</strong> Select the order you wish to modify and update the necessary details.</p>
-  
+  </div>
+
+  <div class="form-row">
     <h3>7. Cancel Order</h3>
     <p><strong>Purpose:</strong> Cancel a single order.</p>
     <p><strong>Procedure:</strong> Select the order you wish to cancel and confirm the cancellation.</p>
-  
+  </div>
+
+  <div class="form-row">
     <h3>8. Sell Order</h3>
     <p><strong>Purpose:</strong> Sell a single order.</p>
     <p><strong>Procedure:</strong> Select the order you wish to sell and confirm the sale.</p>
-  
-    <hr>
-  
-    <p>Ensure all the pre-requisites are met and configured correctly in the <code>users.xlsx</code> file before performing any trading operations. This will help in smooth and error-free execution of trading activities.</p>
-  
-    <h2>Flow Progress</h2>
-  
-    <pre>User Setup -> List Users -> Buy Order -> List Orders -> List Net Positions -> List Holdings -> Modify Order -> Cancel Order -> Sell Order</pre>
   </div>
+
+  <hr>
+
+  <p>Ensure all the pre-requisites are met and configured correctly in the <code>users.xlsx</code> file before performing any trading operations. This will help in smooth and error-free execution of trading operations.</p>
+
+  <h2>Flow Progress</h2>
+
+  <pre>User Setup -> List Users -> Buy Order -> List Orders -> List Net Positions -> List Holdings -> Modify Order -> Cancel Order -> Sell Order</pre>
+</div>

@@ -13,7 +13,7 @@ import { TradeService } from '../../services/trade.service';
 export class SquareOffPositionComponent implements OnInit {
   squareOffForm: FormGroup;
   error: string | null = null;
-
+  loading: boolean = false;
   constructor(private fb: FormBuilder, private route: ActivatedRoute, private router: Router,
     private tradeService: TradeService
   ) {
@@ -23,13 +23,16 @@ export class SquareOffPositionComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.loading = true;
     this.route.params.subscribe(params => {
       const positionData = params['position'];
       console.log('Square off:', positionData);  
       if (positionData) {
         const position = JSON.parse(positionData);
         this.addSquareOff(position);
+        this.loading = false;
       } else {
+        this.loading = false;
         console.error('No position data found in route parameters');
       }
     });
@@ -61,6 +64,7 @@ export class SquareOffPositionComponent implements OnInit {
   }
 
   squareOff(): void {
+    this.loading = true;
     if (this.squareOffForm.invalid) {
       this.error = 'Square off Position form is invalid';
       return;
@@ -85,15 +89,16 @@ export class SquareOffPositionComponent implements OnInit {
       }))
     };
 
-    console.log('Square off payload:', payload);
-  
+    //console.log('Square off payload:', payload);
     this.tradeService.squareOff(payload).subscribe(
       () => {
         this.error = null;
         alert('Square off completed successfully');
+        this.loading = false;
         this.router.navigate(['/orders']);
       },
       (error) => {
+        this.loading
         this.error = 'Failed to Square off position';
         console.error(error);
       }

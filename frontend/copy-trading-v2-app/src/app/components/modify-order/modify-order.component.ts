@@ -15,7 +15,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class ModifyOrderComponent implements OnInit {
   modifyOrderForm: FormGroup;
   error: string | null = null;
-
+  loading: boolean = false;
   constructor(
     private fb: FormBuilder,
     private tradeService: TradeService,
@@ -78,15 +78,19 @@ export class ModifyOrderComponent implements OnInit {
       this.error = 'Modify order form is invalid';
       return;
     }
-
+    this.loading = true;
     const orderDetails = this.modifyOrderForm.value;
+    // Assign CurrentQuantity to Quantity
+    orderDetails.Quantity = orderDetails.CurrentQuantity;
     this.tradeService.modifyOrder(orderDetails).subscribe(
       () => {
         this.error = null;
+        this.loading = false;
         alert('Order modified successfully');
         this.router.navigate(['/orders']);
       },
       (error) => {
+        this.loading = false;
         this.error = 'Failed to modify order';
         console.error(error);
       }

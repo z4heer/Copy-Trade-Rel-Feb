@@ -1,26 +1,27 @@
-<div class="holdings">
+<div class="holdings content">
   <div *ngIf="error" class="error">{{ error }}</div>
- <!-- <div *ngIf="holdings.length == 0">No Data found! Please check if active and session active users are available</div> -->
-  <table *ngIf="holdings.length > 0">
+  <div *ngIf="loading" class="loading">Loading...</div>
+  <div class="filter-sort">
+    <input type="text" placeholder="Filter by Symbol" [(ngModel)]="filterSymbol" (ngModelChange)="filterHoldings()" />
+  </div>
+  <table *ngIf="filteredHoldings.length">
     <thead>
       <tr>
-        <th>Symbol</th>
-        <!--<th>Trading Symbol</th> -->
-        <th>Exchange</th>
-        <th>Quantity</th>
-        <th>LTP</th>
-        <th>Total Value</th>
-        <th>Change % Today</th>
-        <th>Product Code</th>
-        <th>Streaming Symbol</th>
-        <th>User ID</th>
+        <th (click)="sortHoldings('Symbol')" [class.sorted-asc]="sortField === 'Symbol' && sortOrder === 'asc'" [class.sorted-desc]="sortField === 'Symbol' && sortOrder === 'desc'">Symbol</th>
+        <th (click)="sortHoldings('Exchange')">Exchange</th>
+        <th (click)="sortHoldings('BuyQuantity')">Quantity</th>
+        <th (click)="sortHoldings('Ltp')">LTP</th>
+        <th (click)="sortHoldings('TotalVal')">Total Value</th>
+        <th (click)="sortHoldings('ChangePcToday')">Change % Today</th>
+        <th (click)="sortHoldings('ProductCode')">Product Code</th>
+        <th (click)="sortHoldings('StreamingSymbol')">Streaming Symbol</th>
+        <th (click)="sortHoldings('userid')">User ID</th>
         <th>Action</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let holding of holdings">
+      <tr *ngFor="let holding of filteredHoldings">
         <td>{{ holding.Symbol }}</td>
-       <!-- <td>{{ holding.TradingSymbol }}</td> -->
         <td>{{ holding.Exchange }}</td>
         <td>{{ holding.BuyQuantity }}</td>
         <td>{{ holding.Ltp }}</td>
@@ -31,8 +32,8 @@
         <td>{{ holding.userid }}</td>
         <td>
           <button (click)="call_squareoff(holding)">Square Off</button>
+        </td>
       </tr>
     </tbody>
   </table>
-
 </div>

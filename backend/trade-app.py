@@ -4,6 +4,8 @@ import pandas as pd
 import logging
 import json
 from transform import transformed_orderbook
+import os
+import sys
 
 app = Flask(__name__)
 
@@ -11,9 +13,17 @@ app = Flask(__name__)
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+def resource_path(relative_path):
+    """Get the absolute path to resource, works for dev and for PyInstaller bundle"""
+    if hasattr(sys, '_MEIPASS'):
+        return os.path.join(sys._MEIPASS, relative_path)
+    return os.path.join(os.path.abspath("."), relative_path)
+
+# Usage: e.g., load a config file
+config_file = resource_path("conf/users.xlsx")
 # Load user data from users.xlsx
 try:
-    user_data = pd.read_excel('conf/users.xlsx')
+    user_data = pd.read_excel(config_file)
     user_data['userid'] = user_data['userid'].astype(str).str.strip()
     user_data['active'] = user_data['active'].astype(bool)
 except Exception as e:

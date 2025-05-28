@@ -1,3 +1,47 @@
-2025-03-20 17:10:15,769 [INFO] werkzeug:  * Restarting with stat
-2025-03-20 17:10:16,819 [WARNING] werkzeug:  * Debugger is active!
-2025-03-20 17:10:16,819 [INFO] werkzeug:  * Debugger PIN: 208-195-166
+2025-05-15 14:51:00,876 [INFO] werkzeug: 127.0.0.1 - - [15/May/2025 14:51:00] "GET /api/all_users HTTP/1.1" 200 -
+2025-05-15 14:51:19,827 [INFO] werkzeug: 127.0.0.1 - - [15/May/2025 14:51:19] "OPTIONS /api/holdings_all_users HTTP/1.1" 200 -
+2025-05-15 15:03:12,257 [INFO] werkzeug: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-05-15 15:03:12,257 [INFO] werkzeug: [33mPress CTRL+C to quit[0m
+2025-05-15 15:03:12,262 [INFO] werkzeug:  * Restarting with stat
+2025-05-15 15:03:15,292 [WARNING] werkzeug:  * Debugger is active!
+2025-05-15 15:03:15,297 [INFO] werkzeug:  * Debugger PIN: 208-195-166
+2025-05-15 15:03:30,956 [INFO] werkzeug: 127.0.0.1 - - [15/May/2025 15:03:30] "GET /api/all_users HTTP/1.1" 200 -
+2025-05-15 15:03:51,859 [INFO] werkzeug: 127.0.0.1 - - [15/May/2025 15:03:51] "OPTIONS /api/modify_user HTTP/1.1" 200 -
+2025-05-15 15:03:51,870 [DEBUG] __main__: Modify_user()- {'userid': '70157530', 'active': False, 'reqId': '323639c7079fc73f', 'username': 'Harish', 'apiKey': '33Vv-PcCE5ZPUQ', 'api_secret_password': 'jeTP4a9_g6n&@Hi2', 'session_active': False}
+2025-05-15 15:03:52,023 [INFO] users: User 70157530 modified successfully.
+2025-05-15 15:03:52,024 [INFO] werkzeug: 127.0.0.1 - - [15/May/2025 15:03:52] "POST /api/modify_user HTTP/1.1" 200 -
+2025-05-15 15:03:52,126 [INFO] werkzeug: 127.0.0.1 - - [15/May/2025 15:03:52] "GET /api/all_users HTTP/1.1" 200 -
+2025-05-15 15:03:56,667 [INFO] werkzeug: 127.0.0.1 - - [15/May/2025 15:03:56] "OPTIONS /api/holdings_all_users HTTP/1.1" 200 -
+2025-05-28 18:20:54,363 [INFO] werkzeug: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-05-28 18:20:54,363 [INFO] werkzeug: [33mPress CTRL+C to quit[0m
+2025-05-28 18:20:54,363 [INFO] werkzeug:  * Restarting with stat
+2025-05-28 18:20:56,215 [WARNING] werkzeug:  * Debugger is active!
+2025-05-28 18:20:56,232 [INFO] werkzeug:  * Debugger PIN: 208-195-166
+2025-05-28 18:38:47,137 [INFO] werkzeug: 127.0.0.1 - - [28/May/2025 18:38:47] "GET / HTTP/1.1" 200 -
+2025-05-28 18:38:47,205 [INFO] werkzeug: 127.0.0.1 - - [28/May/2025 18:38:47] "GET /polyfills-FFHMD2TL.js HTTP/1.1" 200 -
+2025-05-28 18:38:47,233 [INFO] werkzeug: 127.0.0.1 - - [28/May/2025 18:38:47] "GET /main-DUF2B3LM.js HTTP/1.1" 200 -
+2025-05-28 18:38:47,233 [INFO] werkzeug: 127.0.0.1 - - [28/May/2025 18:38:47] "GET /styles-ALRIEYHZ.css HTTP/1.1" 200 -
+2025-05-28 18:38:47,466 [INFO] werkzeug: 127.0.0.1 - - [28/May/2025 18:38:47] "GET /api/all_users HTTP/1.1" 200 -
+2025-05-28 18:39:27,046 [INFO] users: User Test-1 added successfully.
+2025-05-28 18:39:27,046 [DEBUG] __main__: success: User added successfully
+2025-05-28 18:39:27,046 [INFO] werkzeug: 127.0.0.1 - - [28/May/2025 18:39:27] "POST /api/add_user HTTP/1.1" 200 -
+2025-05-28 18:39:27,106 [INFO] werkzeug: 127.0.0.1 - - [28/May/2025 18:39:27] "GET /api/all_users HTTP/1.1" 200 -
+2025-05-28 18:39:43,471 [INFO] users: Deleting user 70157530 from DataFrame.
+2025-05-28 18:39:43,472 [INFO] users: User 70157530 deleted. Saving changes to Excel.
+2025-05-28 18:39:43,533 [INFO] users: User 70157530 deleted successfully.
+2025-05-28 18:39:43,533 [INFO] werkzeug: 127.0.0.1 - - [28/May/2025 18:39:43] "POST /api/delete_user HTTP/1.1" 200 -
+2025-05-28 18:39:43,583 [INFO] werkzeug: 127.0.0.1 - - [28/May/2025 18:39:43] "GET /api/all_users HTTP/1.1" 200 -
+2025-05-28 18:39:50,421 [INFO] users: Deleting user 70144644 from DataFrame.
+2025-05-28 18:39:50,421 [INFO] users: User 70144644 deleted. Saving changes to Excel.
+2025-05-28 18:39:50,466 [INFO] users: User 70144644 deleted successfully.
+2025-05-28 18:39:50,466 [INFO] werkzeug: 127.0.0.1 - - [28/May/2025 18:39:50] "POST /api/delete_user HTTP/1.1" 200 -
+2025-05-28 18:39:50,526 [INFO] werkzeug: 127.0.0.1 - - [28/May/2025 18:39:50] "GET /api/all_users HTTP/1.1" 200 -
+2025-05-28 18:40:44,239 [INFO] werkzeug: 127.0.0.1 - - [28/May/2025 18:40:44] "GET / HTTP/1.1" 200 -
+2025-05-28 18:40:44,316 [INFO] werkzeug: 127.0.0.1 - - [28/May/2025 18:40:44] "GET /polyfills-FFHMD2TL.js HTTP/1.1" 200 -
+2025-05-28 18:40:44,514 [INFO] werkzeug: 127.0.0.1 - - [28/May/2025 18:40:44] "GET /main-DUF2B3LM.js HTTP/1.1" 200 -
+2025-05-28 18:40:44,650 [INFO] werkzeug: 127.0.0.1 - - [28/May/2025 18:40:44] "GET /styles-ALRIEYHZ.css HTTP/1.1" 200 -
+2025-05-28 18:40:44,688 [INFO] werkzeug: 127.0.0.1 - - [28/May/2025 18:40:44] "GET /api/all_users HTTP/1.1" 200 -
+2025-05-28 18:40:44,999 [INFO] werkzeug: 127.0.0.1 - - [28/May/2025 18:40:44] "GET /favicon.ico HTTP/1.1" 200 -
+2025-05-28 18:40:49,248 [INFO] werkzeug: 127.0.0.1 - - [28/May/2025 18:40:49] "OPTIONS /api/holdings_all_users HTTP/1.1" 200 -

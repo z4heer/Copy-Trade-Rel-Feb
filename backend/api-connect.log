@@ -1,1 +1,122 @@
-2025-03-20 17:10:15,657 [INFO] werkzeug:  * Detected change in 'C:\\Users\\HP\\source\\repos\\z4heer\\coding\\Mar Code fixes\\Copy-Trade-Rel-Feb\\backend\\app.py', reloading
+2025-05-28 18:40:49,264 [INFO] APIConnect.APIConnect: Loggers initiated with provided configuration.
+2025-05-28 18:40:49,264 [INFO] constants.router: Router object is being created.
+2025-05-28 18:40:49,264 [INFO] constants.router: URL constants loaded with provided configuration file.
+2025-05-28 18:40:49,266 [INFO] APIConnect.http: Http object is being created.
+2025-05-28 18:40:49,266 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-05-28 18:40:49,266 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-05-28 18:40:49,266 [INFO] APIConnect.APIConnect: User data file found, loading data.
+2025-05-28 18:40:49,284 [INFO] APIConnect.api_utils: Checking for new update.
+2025-05-28 18:40:49,302 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-05-28 18:40:49,661 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-content/content/adhoc/lib/version/ HTTP/1.1" 401 174
+2025-05-28 18:40:49,665 [DEBUG] APIConnect.http: Error response: {"config":{},"error":{"actCd":"52","errCd":"ETRD00036","errMsg":"Invalid Source Token. Session Expired"},"msgID":"bb8d8080-5508-48ec-967c-dfb74dfe618b","srvTm":1748437851093}
+2025-05-28 18:40:49,665 [DEBUG] APIConnect.api_utils: Response received: 
+2025-05-28 18:40:49,805 [INFO] APIConnect.login_helper: Extracted instruments.csv
+2025-05-28 18:40:50,487 [INFO] feed.feed: Connection established with subscriber.
+2025-05-28 18:40:50,907 [INFO] APIConnect.login_helper: Loaded instruments.csv
+2025-05-28 18:40:50,947 [INFO] APIConnect.login_helper: Extracted mfInstruments.csv
+2025-05-28 18:40:51,042 [INFO] APIConnect.login_helper: Loaded mfInstruments.csv
+2025-05-28 18:40:51,165 [INFO] APIConnect.APIConnect: Holdings method is called.
+2025-05-28 18:40:51,165 [DEBUG] APIConnect.APIConnect: Holdings method is called with account type: EQ
+2025-05-28 18:40:51,165 [DEBUG] APIConnect.http: Request to url: https://nc.nuvamawealth.com/edelmw-eq/eq/holdings/v1/rmsholdings/45937331/
+2025-05-28 18:40:51,281 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "GET /edelmw-eq/eq/holdings/v1/rmsholdings/45937331/ HTTP/1.1" 401 174
+2025-05-28 18:40:51,281 [DEBUG] APIConnect.http: Error response: {"config":{},"error":{"actCd":"52","errCd":"ETRD00036","errMsg":"Invalid Source Token. Session Expired"},"msgID":"10cb7708-1607-4978-9819-afb73abc7839","srvTm":1748437852729}
+2025-05-28 18:40:51,281 [DEBUG] APIConnect.APIConnect: Response receieved: 
+2025-05-28 18:40:51,281 [ERROR] __main__: Response for userid 45937331 does not contain required keys
+2025-05-28 18:40:51,281 [INFO] werkzeug: 127.0.0.1 - - [28/May/2025 18:40:51] "[35m[1mPOST /api/holdings_all_users HTTP/1.1[0m" 500 -
+2025-05-28 18:41:04,363 [INFO] werkzeug: 127.0.0.1 - - [28/May/2025 18:41:04] "OPTIONS /api/net_position_all_users HTTP/1.1" 200 -
+2025-05-28 18:41:04,376 [INFO] APIConnect.APIConnect: Loggers initiated with provided configuration.
+2025-05-28 18:41:04,376 [INFO] constants.router: Router object is being created.
+2025-05-28 18:41:04,378 [INFO] constants.router: URL constants loaded with provided configuration file.
+2025-05-28 18:41:04,378 [INFO] APIConnect.http: Http object is being created.
+2025-05-28 18:41:04,379 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-05-28 18:41:04,379 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-05-28 18:41:04,383 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-05-28 18:41:04,699 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-login/login/accounts/loginvendor/04FCaiaW37pOKA/ HTTP/1.1" 200 None
+2025-05-28 18:41:04,699 [INFO] APIConnect.login_helper: User logged in successfully.
+2025-05-28 18:41:04,699 [INFO] APIConnect.login_helper: Vendor session generated.
+2025-05-28 18:41:04,811 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-login/login/accounts/logindata/ HTTP/1.1" 222 196
+2025-05-28 18:41:04,811 [ERROR] api_connect_wrapper: Error initializing APIConnect: 'data'
+2025-05-28 18:41:04,811 [ERROR] __main__: Error in net_position_all_users: 'data'
+2025-05-28 18:41:04,811 [INFO] werkzeug: 127.0.0.1 - - [28/May/2025 18:41:04] "[35m[1mPOST /api/net_position_all_users HTTP/1.1[0m" 500 -
+2025-05-28 18:41:25,664 [INFO] werkzeug: 127.0.0.1 - - [28/May/2025 18:41:25] "GET /api/all_users HTTP/1.1" 200 -
+2025-05-28 18:41:31,041 [INFO] werkzeug: 127.0.0.1 - - [28/May/2025 18:41:31] "OPTIONS /api/orders HTTP/1.1" 200 -
+2025-05-28 18:41:31,052 [INFO] APIConnect.APIConnect: Loggers initiated with provided configuration.
+2025-05-28 18:41:31,052 [INFO] constants.router: Router object is being created.
+2025-05-28 18:41:31,052 [INFO] constants.router: URL constants loaded with provided configuration file.
+2025-05-28 18:41:31,052 [INFO] APIConnect.http: Http object is being created.
+2025-05-28 18:41:31,052 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-05-28 18:41:31,052 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-05-28 18:41:31,052 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-05-28 18:41:31,322 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-login/login/accounts/loginvendor/04FCaiaW37pOKA/ HTTP/1.1" 200 None
+2025-05-28 18:41:31,322 [INFO] APIConnect.login_helper: User logged in successfully.
+2025-05-28 18:41:31,322 [INFO] APIConnect.login_helper: Vendor session generated.
+2025-05-28 18:41:31,436 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-login/login/accounts/logindata/ HTTP/1.1" 222 196
+2025-05-28 18:41:31,436 [ERROR] api_connect_wrapper: Error initializing APIConnect: 'data'
+2025-05-28 18:41:31,436 [ERROR] __main__: Error in orders: 'data'
+2025-05-28 18:41:31,436 [INFO] werkzeug: 127.0.0.1 - - [28/May/2025 18:41:31] "[35m[1mPOST /api/orders HTTP/1.1[0m" 500 -
+2025-05-28 18:42:41,382 [INFO] werkzeug: 127.0.0.1 - - [28/May/2025 18:42:41] "[36mGET / HTTP/1.1[0m" 304 -
+2025-05-28 18:42:41,448 [INFO] werkzeug: 127.0.0.1 - - [28/May/2025 18:42:41] "[36mGET /polyfills-FFHMD2TL.js HTTP/1.1[0m" 304 -
+2025-05-28 18:42:41,631 [INFO] werkzeug: 127.0.0.1 - - [28/May/2025 18:42:41] "[36mGET /main-DUF2B3LM.js HTTP/1.1[0m" 304 -
+2025-05-28 18:42:41,799 [INFO] werkzeug: 127.0.0.1 - - [28/May/2025 18:42:41] "[36mGET /styles-ALRIEYHZ.css HTTP/1.1[0m" 304 -
+2025-05-28 18:42:41,820 [INFO] werkzeug: 127.0.0.1 - - [28/May/2025 18:42:41] "GET /api/all_users HTTP/1.1" 200 -
+2025-05-28 18:42:46,888 [INFO] werkzeug: 127.0.0.1 - - [28/May/2025 18:42:46] "OPTIONS /api/holdings_all_users HTTP/1.1" 200 -
+2025-05-28 18:42:46,899 [INFO] APIConnect.APIConnect: Loggers initiated with provided configuration.
+2025-05-28 18:42:46,899 [INFO] constants.router: Router object is being created.
+2025-05-28 18:42:46,899 [INFO] constants.router: URL constants loaded with provided configuration file.
+2025-05-28 18:42:46,899 [INFO] APIConnect.http: Http object is being created.
+2025-05-28 18:42:46,899 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-05-28 18:42:46,899 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-05-28 18:42:46,899 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-05-28 18:42:47,609 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-login/login/accounts/loginvendor/04FCaiaW37pOKA/ HTTP/1.1" 200 None
+2025-05-28 18:42:47,609 [INFO] APIConnect.login_helper: User logged in successfully.
+2025-05-28 18:42:47,609 [INFO] APIConnect.login_helper: Vendor session generated.
+2025-05-28 18:42:47,721 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-login/login/accounts/logindata/ HTTP/1.1" 222 196
+2025-05-28 18:42:47,721 [ERROR] api_connect_wrapper: Error initializing APIConnect: 'data'
+2025-05-28 18:42:47,721 [ERROR] __main__: Error in holdings_all_users: 'data'
+2025-05-28 18:42:47,721 [INFO] werkzeug: 127.0.0.1 - - [28/May/2025 18:42:47] "[35m[1mPOST /api/holdings_all_users HTTP/1.1[0m" 500 -
+2025-05-28 18:43:07,203 [INFO] __main__: Symbol= T
+2025-05-28 18:43:07,215 [INFO] werkzeug: 127.0.0.1 - - [28/May/2025 18:43:07] "[33mGET /api/isin?symbol=T HTTP/1.1[0m" 404 -
+2025-05-28 18:43:07,455 [INFO] __main__: Symbol= TC
+2025-05-28 18:43:07,464 [INFO] werkzeug: 127.0.0.1 - - [28/May/2025 18:43:07] "[33mGET /api/isin?symbol=TC HTTP/1.1[0m" 404 -
+2025-05-28 18:43:07,690 [INFO] __main__: Symbol= TCS
+2025-05-28 18:43:07,737 [INFO] __main__: stock_data=      SYMBOL                    NAME OF COMPANY  SERIES  DATE OF LISTING   PAID UP VALUE   MARKET LOT   ISIN NUMBER   FACE VALUE
+1875    TCS  Tata Consultancy Services Limited      EQ        25-Aug-04               1            1  INE467B01029            1
+2025-05-28 18:43:07,737 [INFO] werkzeug: 127.0.0.1 - - [28/May/2025 18:43:07] "GET /api/isin?symbol=TCS HTTP/1.1" 200 -
+2025-05-28 18:43:12,449 [INFO] werkzeug: 127.0.0.1 - - [28/May/2025 18:43:12] "OPTIONS /api/orders HTTP/1.1" 200 -
+2025-05-28 18:43:12,457 [INFO] APIConnect.APIConnect: Loggers initiated with provided configuration.
+2025-05-28 18:43:12,457 [INFO] constants.router: Router object is being created.
+2025-05-28 18:43:12,457 [INFO] constants.router: URL constants loaded with provided configuration file.
+2025-05-28 18:43:12,457 [INFO] APIConnect.http: Http object is being created.
+2025-05-28 18:43:12,457 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-05-28 18:43:12,457 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-05-28 18:43:12,457 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-05-28 18:43:12,797 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-login/login/accounts/loginvendor/04FCaiaW37pOKA/ HTTP/1.1" 200 None
+2025-05-28 18:43:12,797 [INFO] APIConnect.login_helper: User logged in successfully.
+2025-05-28 18:43:12,804 [INFO] APIConnect.login_helper: Vendor session generated.
+2025-05-28 18:43:12,893 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-login/login/accounts/logindata/ HTTP/1.1" 222 196
+2025-05-28 18:43:12,893 [ERROR] api_connect_wrapper: Error initializing APIConnect: 'data'
+2025-05-28 18:43:12,893 [ERROR] __main__: Error in orders: 'data'
+2025-05-28 18:43:12,910 [INFO] werkzeug: 127.0.0.1 - - [28/May/2025 18:43:12] "[35m[1mPOST /api/orders HTTP/1.1[0m" 500 -
+2025-05-28 18:43:32,036 [INFO] __main__: Symbol= T
+2025-05-28 18:43:32,051 [INFO] werkzeug: 127.0.0.1 - - [28/May/2025 18:43:32] "[33mGET /api/isin?symbol=T HTTP/1.1[0m" 404 -
+2025-05-28 18:43:32,305 [INFO] __main__: Symbol= TC
+2025-05-28 18:43:32,322 [INFO] werkzeug: 127.0.0.1 - - [28/May/2025 18:43:32] "[33mGET /api/isin?symbol=TC HTTP/1.1[0m" 404 -
+2025-05-28 18:43:32,576 [INFO] __main__: Symbol= TCS
+2025-05-28 18:43:32,606 [INFO] __main__: stock_data=      SYMBOL                    NAME OF COMPANY  SERIES  DATE OF LISTING   PAID UP VALUE   MARKET LOT   ISIN NUMBER   FACE VALUE
+1875    TCS  Tata Consultancy Services Limited      EQ        25-Aug-04               1            1  INE467B01029            1
+2025-05-28 18:43:32,606 [INFO] werkzeug: 127.0.0.1 - - [28/May/2025 18:43:32] "GET /api/isin?symbol=TCS HTTP/1.1" 200 -
+2025-05-28 18:43:47,614 [INFO] werkzeug: 127.0.0.1 - - [28/May/2025 18:43:47] "OPTIONS /api/place_trade HTTP/1.1" 200 -
+2025-05-28 18:43:47,626 [INFO] APIConnect.APIConnect: Loggers initiated with provided configuration.
+2025-05-28 18:43:47,626 [INFO] constants.router: Router object is being created.
+2025-05-28 18:43:47,626 [INFO] constants.router: URL constants loaded with provided configuration file.
+2025-05-28 18:43:47,626 [INFO] APIConnect.http: Http object is being created.
+2025-05-28 18:43:47,626 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-05-28 18:43:47,626 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-05-28 18:43:47,628 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-05-28 18:43:48,015 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-login/login/accounts/loginvendor/04FCaiaW37pOKA/ HTTP/1.1" 200 None
+2025-05-28 18:43:48,031 [INFO] APIConnect.login_helper: User logged in successfully.
+2025-05-28 18:43:48,031 [INFO] APIConnect.login_helper: Vendor session generated.
+2025-05-28 18:43:48,127 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-login/login/accounts/logindata/ HTTP/1.1" 222 196
+2025-05-28 18:43:48,127 [ERROR] api_connect_wrapper: Error initializing APIConnect: 'data'
+2025-05-28 18:43:48,127 [ERROR] __main__: Error in place_trade: 'data'
+2025-05-28 18:43:48,134 [INFO] werkzeug: 127.0.0.1 - - [28/May/2025 18:43:48] "[35m[1mPOST /api/place_trade HTTP/1.1[0m" 500 -

@@ -1,12 +1,17 @@
+import os
+from utils import resource_path
 import pandas as pd
 import logging
 
 logger = logging.getLogger(__name__)
-
+xls_path = resource_path("conf/users.xlsx")
+print("Looking for:", xls_path)
+print("Exists?", os.path.exists(xls_path))
 def load_user_data():
     """Load user data from the Excel file."""
     try:
-        user_data = pd.read_excel('conf/users.xlsx')
+        user_data = pd.read_excel(xls_path)
+        #user_data = pd.read_excel('conf/users.xlsx')
         user_data['userid'] = user_data['userid'].astype(str).str.strip()
         user_data['active'] = user_data['active'].astype(bool)
         return user_data
@@ -17,7 +22,8 @@ def load_user_data():
 def load_all_user_data():
     """Load user data from the Excel file."""
     try:
-        user_data = pd.read_excel('conf/users.xlsx')
+        user_data = pd.read_excel(xls_path)
+        #user_data = pd.read_excel('conf/users.xlsx')
         user_data['userid'] = user_data['userid'].astype(str).str.strip()
         return user_data
     except Exception as e:
@@ -27,7 +33,7 @@ def load_all_user_data():
 def save_user_data(user_data):
     """Save the user data back to the Excel file."""
     try:
-        user_data.to_excel('conf/users.xlsx', index=False)
+        user_data.to_excel(xls_path, index=False)
     except Exception as e:
         logger.error(f"Error saving user data: {e}")
         raise

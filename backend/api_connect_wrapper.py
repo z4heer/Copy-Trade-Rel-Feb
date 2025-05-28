@@ -1,4 +1,6 @@
 import json
+import os
+import sys
 
 from APIConnect.APIConnect import APIConnect
 from APIConnect.order import Order
@@ -11,20 +13,27 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+def resource_path(relative_path):
+    """Get the absolute path to resource, works for dev and for PyInstaller bundle"""
+    if hasattr(sys, '_MEIPASS'):
+        return os.path.join(sys._MEIPASS, relative_path)
+    return os.path.join(os.path.abspath("."), relative_path)
+
+# Usage: e.g., load a config file
 class APIConnectWrapper:
     def __init__(self, user_info):
         try:
+            config_file = resource_path("conf/settings.ini")
             self.api_connect = APIConnect(
                 user_info['apiKey'],
                 user_info['api_secret_password'],
                 user_info['reqId'],
                 False,
-                'conf/settings.ini'
+                config_file
             )
         except Exception as e:
             logger.error(f"Error initializing APIConnect: {e}")
             raise
-
     def login_vendor(self, vendorID, pwd):
         try:
             return self.api_connect.Post(f'/accounts/loginvendor/{vendorID}', json={'pwd': pwd})

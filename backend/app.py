@@ -1,17 +1,29 @@
 import json
 
-from flask import Flask, request, jsonify, Response
+from flask import Flask, request, jsonify, Response, send_from_directory
 from api_connect_wrapper import APIConnectWrapper
 import pandas as pd
 import logging
+from utils import resource_path
 from flask_cors import CORS
 from transform import transformed_orderbook, transformed_tradebook
 from users import add_user, modify_user, delete_user, modify_status, load_user_data, save_user_data, get_user_info, \
     get_user_info_1, load_all_user_data
+import os
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder="static", static_url_path="")
 CORS(app)  # Enable CORS
 
+
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def serve_static(path):
+    if path != "" and os.path.exists(os.path.join(app.static_folder, path)):
+        return send_from_directory(app.static_folder, path)
+    else:
+        return send_from_directory(app.static_folder, 'index.html')
+
+config_file = resource_path("conf/EQUITY_L.csv")
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -559,7 +571,9 @@ def api_delete_user():
 
 def get_isin_from_csv(symbol):
     try:
-        df = pd.read_csv("conf/EQUITY_L.csv")
+        df = pd.read_csv(config_file)
+        #df = pd.read_csv("conf/EQUITY_L.csv")
+
     except FileNotFoundError:
         return None, "CSV file not found. Please download it manually."
     df.columns = df.columns.str.upper()

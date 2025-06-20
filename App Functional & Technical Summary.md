@@ -1,7 +1,3 @@
-Here is a concise functional and technical summary of your Copy Trading App based on the reviewed frontend and backend code:
-
----
-
 ## Functional Summary
 
 ### 1. **Purpose**
@@ -58,5 +54,12 @@ Here is a concise functional and technical summary of your Copy Trading App base
 - API responses are mapped and transformed for consistent frontend consumption.
 - The codebase allows easy switching between development (Python scripts) and production (packaged executable).
 - Navigation and UI are component-driven for maintainability and extensibility.
+
+---
+
+## Useful Links
+
+- [Frontend code and structure](https://github.com/z4heer/Copy-Trade-Rel-Feb/tree/main/frontend/copy-trading-v2-app)
+- [Backend code and endpoints](https://github.com/z4heer/Copy-Trade-Rel-Feb/tree/main/backend)
 
 ---
